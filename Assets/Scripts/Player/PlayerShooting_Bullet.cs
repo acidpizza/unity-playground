@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerShooting_Bullet : MonoBehaviour 
 {
-	public int damagePerShot = 20;
 	public float timeBetweenBullets = 0.15f;
 	public float bulletLifeTime = 3f;
 	public float shootForce = 10f;

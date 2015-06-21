@@ -481,43 +481,6 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!120 &2028651383
-LineRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2028651380}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 8b034b827e61f804bbc501f2e46bb93c, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: .422567993, y: .309769213, z: .746149421}
-  - {x: .422567993, y: .309769213, z: 1.74614942}
-  m_Parameters:
-    startWidth: .100000001
-    endWidth: .100000001
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4278218751
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4278251007
-  m_UseWorldSpace: 1
 --- !u!199 &2028651384
 ParticleSystemRenderer:
   m_ObjectHideFlags: 0
@@ -1623,7 +1586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fcceb7d99928c4e80600a25e15e9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
   timeBetweenBullets: .150000006
   bulletLifeTime: 3
   shootForce: 10

@@ -5,6 +5,8 @@ public class BulletHit : MonoBehaviour
 {
 	public ParticleSystem hitParticlesPrefab;
 
+	public int damagePerShot = 20;
+
 	void OnCollisionEnter(Collision other) 
 	{
 		ParticleSystem hitParticles = Instantiate (hitParticlesPrefab, other.contacts [0].point, hitParticlesPrefab.transform.rotation) as ParticleSystem;
