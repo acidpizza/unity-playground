@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     public GameObject enemy;
