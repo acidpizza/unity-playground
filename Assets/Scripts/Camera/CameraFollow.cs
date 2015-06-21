@@ -12,12 +12,12 @@ public class CameraFollow : MonoBehaviour {
 	public float zoomMin = 5.0f;
 	public float zoomMax = 40.0f;
 	private float zoom;
-	Camera camera;
+	Camera cam;
 
 	void Start()
 	{
-		camera = GetComponent<Camera>();
-		zoom = camera.fieldOfView;
+		cam = GetComponent<Camera>();
+		zoom = cam.fieldOfView;
 		offset = transform.position - target.position;
 	}
 
@@ -29,7 +29,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		camera.fieldOfView = Mathf.Lerp (camera.fieldOfView, zoom, Time.deltaTime * zoomSpeed);
+		cam.fieldOfView = Mathf.Lerp (cam.fieldOfView, zoom, Time.deltaTime * zoomSpeed);
 		Vector3 targetCamPos = target.position + offset;
 		transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
 	}

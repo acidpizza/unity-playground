@@ -2743,14 +2743,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2028651380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 176676302729ee443aab5bad0eeb91bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 64fcceb7d99928c4e80600a25e15e9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerShot: 20
   timeBetweenBullets: .150000006
-  range: 50
+  bulletLifeTime: 3
+  shootForce: 10
   gunParticles: {fileID: 2028651385}
   hitParticles: {fileID: 272316904}
+  bulletPrefab: {fileID: 5437372, guid: b483bd7462add6240b78d7339091014e, type: 2}
 --- !u!82 &2028651387
 AudioSource:
   m_ObjectHideFlags: 0

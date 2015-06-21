@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
 		MovementWorldAxes_Keyboard(horizontal_input,vertical_input);
 		Turn_Mouse ();
-		Animating (horizontal_input, vertical_input);	// Animate player
+		Animating (horizontal_input, vertical_input, 0);	// Animate player
 
 	}
 
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 	}
 #endregion
 
-	void Animating(float horizontal_input, float vertical_input, float strafe_input = 0)
+	void Animating(float horizontal_input, float vertical_input, float strafe_input)
 	{
 		bool walking = horizontal_input != 0f || vertical_input != 0f || strafe_input != 0f;
 		anim.SetBool ("IsWalking", walking);
