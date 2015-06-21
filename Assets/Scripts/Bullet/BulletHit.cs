@@ -13,13 +13,13 @@ public class BulletHit : MonoBehaviour
 		hitParticles.Play ();
 		Destroy (hitParticles.gameObject, 0.3f);
 
-		/*
-		EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
+
+		EnemyHealth enemyHealth = other.collider.GetComponent <EnemyHealth> ();
         if(enemyHealth != null)
         {
-            enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+            enemyHealth.TakeDamage (damagePerShot);
         }
-		*/
+
 
 		Destroy(gameObject);
 	}
