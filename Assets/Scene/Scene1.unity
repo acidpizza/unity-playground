@@ -1382,6 +1382,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 988755848}
   smoothing: 5
+  zoomSensitivity: 15
+  zoomSpeed: 5
+  zoomMin: 5
+  zoomMax: 40
 --- !u!1 &988755847 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
@@ -1503,7 +1507,7 @@ GameObject:
   - 65: {fileID: 1876641131}
   - 23: {fileID: 1876641130}
   m_Layer: 9
-  m_Name: Cube
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,7 +1563,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1876641129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.33423853, y: .289999992, z: -.227570415}
+  m_LocalPosition: {x: .270000011, y: .289999992, z: 4.53000021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2744,7 +2748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerShot: 20
   timeBetweenBullets: .150000006
-  range: 100
+  range: 50
   gunParticles: {fileID: 2028651385}
   hitParticles: {fileID: 272316904}
 --- !u!82 &2028651387
