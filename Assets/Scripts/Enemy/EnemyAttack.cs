@@ -46,12 +46,12 @@ public class EnemyAttack : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if(timer >= timeBetweenAttacks && playerInRange && !enemyHealth.IsDead ())
         {
             Attack ();
         }
 
-        if(playerHealth.currentHealth <= 0)
+        if(playerHealth.IsDead())
         {
             anim.SetTrigger ("PlayerDead");
         }
@@ -62,7 +62,7 @@ public class EnemyAttack : MonoBehaviour
     {
         timer = 0f;
 
-        if(playerHealth.currentHealth > 0)
+        if(!playerHealth.IsDead ())
         {
             playerHealth.TakeDamage (attackDamage);
         }

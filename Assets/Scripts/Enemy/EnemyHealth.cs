@@ -3,7 +3,6 @@
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public int currentHealth;
     public int scoreValue = 10;
     public AudioClip deathClip;
 
@@ -14,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     bool isDead;
     bool isSinking;
 	float sinkSpeed = 1f;
+	int currentHealth;
 
     void Awake ()
     {
@@ -49,6 +49,11 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+	public bool IsDead()
+	{
+		return isDead;
+	}
+
 
     void Death ()
     {
@@ -68,7 +73,7 @@ public class EnemyHealth : MonoBehaviour
         GetComponent <NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
-        ScoreManager.score += scoreValue;
+        ScoreManager.AddScore(scoreValue);
         Destroy (gameObject, 2f);
     }
 }
