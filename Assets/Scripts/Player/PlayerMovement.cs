@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		KeyboardControl();
-		//KeyboardAndMouseControl ();
+		//KeyboardControl();
+		KeyboardAndMouseControl ();
 	}
 
 #region KeyboardOnly
