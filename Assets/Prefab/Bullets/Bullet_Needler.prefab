@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11467594}
   - 96: {fileID: 9623332}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet_Needler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitParticlesPrefab: {fileID: 19896466, guid: 9bdecd0198210214d93f2209643ac04f, type: 2}
+  timeBetweenBullets: .400000006
+  burstRounds: 3
+  burstTime: 1
   damagePerShot: 20
+  bulletLifeTime: 3
+  shootForce: 10
+  shootSpread: 2
 --- !u!136 &13682924
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -206,6 +212,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shootSpread
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

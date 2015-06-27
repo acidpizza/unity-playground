@@ -3,22 +3,27 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour 
 {
-	public float timeBetweenBullets = 0.15f;
-	public float bulletLifeTime = 3f;
-	public float shootForce = 10f;
 	public Rigidbody bulletPrefab;
-	
+	float timeBetweenBullets;
+	//int burstRounds;
+	//float burstTime;
+	float bulletLifeTime;
+	float shootForce;
+	float shootSpread;
+	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
+
 	float timer;
 	AudioSource gunAudio;
 	Light gunLight;
 	ParticleSystem gunFlareParticles;
 	float effectsDisplayTime = 0.03f;
-	
+
 	void Awake ()
 	{
 		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 		gunFlareParticles = GetComponent<ParticleSystem> ();
+		ChangeWeapon (bulletPrefab);
 	}
 
 	void Update ()
@@ -32,6 +37,25 @@ public class PlayerShooting : MonoBehaviour
 		}
 	}
 
+	public void ChangeWeapon(Rigidbody newBulletPrefab)
+	{
+		bulletPrefab = newBulletPrefab;
+		BulletSpec bulletSpec = bulletPrefab.GetComponent <BulletSpec> ();
+		if (bulletSpec != null) 
+		{
+			timeBetweenBullets = bulletSpec.GetTimeBetweenBullets();
+			//burstRounds = bulletSpec.GetBurstRounds();
+			//burstTime = bulletSpec.GetBurstTime();
+			bulletLifeTime = bulletSpec.GetBulletLifeTime();
+			shootForce = bulletSpec.GetShootForce();
+			shootSpread = bulletSpec.GetShootSpread();
+		}
+		else
+		{
+			Debug.Log ("Cannot change weapon");
+		}
+	}
+
 	void Shoot ()
 	{
 		timer = 0f;
@@ -40,8 +64,15 @@ public class PlayerShooting : MonoBehaviour
 		gunFlareParticles.Stop ();
 		gunFlareParticles.Play ();
 
-		Rigidbody bullet = Instantiate (bulletPrefab, transform.position, transform.rotation * bulletPrefab.transform.rotation) as Rigidbody;
-		bullet.AddForce(transform.forward * shootForce, ForceMode.Impulse);
+		Transform bulletTransform = transform;
+		if(shootSpread != 0)
+		{
+			bulletTransform.Rotate(new Vector3(0,1,0) * Random.Range (0, shootSpread) * bulletSpreadDirection);
+			bulletSpreadDirection *= -1; // Always ensure each successive bullet is rotated in the opposite direction
+		}
+
+		Rigidbody bullet = Instantiate (bulletPrefab, bulletTransform.position, bulletTransform.rotation * bulletPrefab.transform.rotation) as Rigidbody;
+		bullet.AddForce(bulletTransform.forward * shootForce, ForceMode.Impulse);
 		Destroy (bullet.gameObject, bulletLifeTime);
 	}
 
