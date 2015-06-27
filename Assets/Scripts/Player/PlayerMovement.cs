@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;		// Speed of player
 	public float rotateSpeed = 6f; 	// Speed of rotation of player
+	public MeshFilter crosshair;
 
 	Vector3 movement;			// Vector to store direction of player's movement
 	Quaternion rotation;		// Quaternion to store direction of player's rotation
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	Rigidbody playerRigidbody;	// Reference to player's rigidbody
 	int floorMask;				// Layer mask so that a ray can be cast just at gameobjects on the floor layer
 	float camRayLength = 100f;	// Length of ray from camera into the scene
+
 
 	void Awake()
 	{
