@@ -5,7 +5,7 @@ public class BulletSpec_AssaultRifle : BulletSpec
 {
 	public BulletSpec_AssaultRifle()
 	{
-		timeBetweenBurst = 0.6f;
+		timeBetweenBurst = 1.2f;
 		burstRounds = 3;
 		timeBetweenBulletInBurst = 0.1f;
 

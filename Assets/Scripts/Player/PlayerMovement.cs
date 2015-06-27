@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;		// Speed of player
 	public float rotateSpeed = 6f; 	// Speed of rotation of player
-	public MeshFilter crosshair;
+	//public MeshFilter crosshair;
 
 	Vector3 movement;			// Vector to store direction of player's movement
 	Quaternion rotation;		// Quaternion to store direction of player's rotation

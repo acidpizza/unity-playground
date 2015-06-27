@@ -400,7 +400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotateSpeed: 5
-  crosshair: {fileID: 3309608}
 --- !u!114 &11490330
 MonoBehaviour:
   m_ObjectHideFlags: 1

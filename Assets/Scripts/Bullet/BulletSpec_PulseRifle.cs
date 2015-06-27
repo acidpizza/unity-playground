@@ -5,7 +5,7 @@ public class BulletSpec_PulseRifle : BulletSpec
 {
 	public BulletSpec_PulseRifle()
 	{
-		timeBetweenBurst = 0.8f;
+		timeBetweenBurst = 1.1f;
 		burstRounds = 2;
 		timeBetweenBulletInBurst = 0.2f;
 

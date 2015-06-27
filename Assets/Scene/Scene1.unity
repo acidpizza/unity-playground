@@ -6960,18 +6960,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 102790, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 11490330, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 257906210}
-    - target: {fileID: 11497462, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 5495494, guid: a984abe4a50f2684798638ecc08dc06e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
   m_IsPrefabParent: 0

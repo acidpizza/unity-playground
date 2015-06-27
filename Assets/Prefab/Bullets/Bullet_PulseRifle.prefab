@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitParticlesPrefab: {fileID: 19896466, guid: 9bdecd0198210214d93f2209643ac04f, type: 2}
-  timeBetweenBurst: .800000012
+  timeBetweenBurst: 1.10000002
   burstRounds: 2
   timeBetweenBulletInBurst: .200000003
   damagePerShot: 60
