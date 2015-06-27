@@ -11,7 +11,7 @@ public class BulletSpec_Pistol : BulletSpec
 
 		damagePerShot = 20;
 		bulletLifeTime = 0.8f;
-		shootForce = 10f;
+		shootForce = 6f;
 		shootSpread = 2f;
 	}	
 }
