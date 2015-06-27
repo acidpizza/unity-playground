@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int scoreValue = 1;
     public AudioClip deathClip;
-
+	public string enemyName = "ZomBunny";
+	public GameManager gameManager;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -20,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+		gameManager = GameObject.Find ("Game").GetComponent<GameManager> ();
 
         currentHealth = startingHealth;
     }
@@ -73,7 +75,7 @@ public class EnemyHealth : MonoBehaviour
         GetComponent <NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
-        ScoreManager.AddScore(scoreValue);
+        gameManager.AddScore(scoreValue, enemyName, transform);
         Destroy (gameObject, 2f);
     }
 }
