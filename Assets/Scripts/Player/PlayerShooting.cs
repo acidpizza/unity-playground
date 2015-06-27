@@ -4,13 +4,15 @@ using System.Collections;
 public class PlayerShooting : MonoBehaviour 
 {
 	public Rigidbody bulletPrefab;
-	float timeBetweenBullets;
-	//int burstRounds;
-	//float burstTime;
+	float timeBetweenBurst;
+	int burstRounds;
+	float timeBetweenBulletInBurst;
 	float bulletLifeTime;
 	float shootForce;
 	float shootSpread;
+
 	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
+	int currentBurstCount = 0; // Track how many burst bullets have been shot so far
 
 	float timer;
 	AudioSource gunAudio;
@@ -29,11 +31,39 @@ public class PlayerShooting : MonoBehaviour
 	void Update ()
 	{
 		timer += Time.deltaTime;
-		
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+
+		if(Input.GetButton ("Fire1") && Time.timeScale != 0) // Want to fire and game is not paused
 		{
-			Shoot ();
-			Invoke ("DisableEffects", effectsDisplayTime);
+			if(burstRounds != 0)
+			{
+				// Burst enabled
+				if(timer >= timeBetweenBulletInBurst && currentBurstCount < burstRounds)
+				{
+					// In the midst of a burst
+					currentBurstCount++;
+					Shoot ();
+					Invoke ("DisableEffects", effectsDisplayTime);
+				}
+				else if(currentBurstCount >= burstRounds)
+				{
+					// Hit burst limit -> need to wait for new burst
+					if(timer >= timeBetweenBurst)
+					{
+						currentBurstCount = 1;
+						Shoot ();
+						Invoke ("DisableEffects", effectsDisplayTime);
+					}
+				}
+			}
+			else
+			{
+				// Burst disabled
+				if(timer >= timeBetweenBurst)
+				{
+					Shoot ();
+					Invoke ("DisableEffects", effectsDisplayTime);
+				}
+			}
 		}
 	}
 
@@ -43,9 +73,9 @@ public class PlayerShooting : MonoBehaviour
 		BulletSpec bulletSpec = bulletPrefab.GetComponent <BulletSpec> ();
 		if (bulletSpec != null) 
 		{
-			timeBetweenBullets = bulletSpec.GetTimeBetweenBullets();
-			//burstRounds = bulletSpec.GetBurstRounds();
-			//burstTime = bulletSpec.GetBurstTime();
+			timeBetweenBurst = bulletSpec.GetTimeBetweenBurst();
+			burstRounds = bulletSpec.GetBurstRounds();
+			timeBetweenBulletInBurst = bulletSpec.GetTimeBetweenBulletInBurst();
 			bulletLifeTime = bulletSpec.GetBulletLifeTime();
 			shootForce = bulletSpec.GetShootForce();
 			shootSpread = bulletSpec.GetShootSpread();
