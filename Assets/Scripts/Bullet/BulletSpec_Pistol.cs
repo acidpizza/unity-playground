@@ -13,5 +13,8 @@ public class BulletSpec_Pistol : BulletSpec
 		bulletLifeTime = 0.8f;
 		shootForce = 6f;
 		shootSpread = 2f;
+
+		bulletCount = 0;
+		bulletName = "Pistol";
 	}	
 }

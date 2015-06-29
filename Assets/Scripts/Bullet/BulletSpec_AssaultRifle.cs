@@ -13,5 +13,8 @@ public class BulletSpec_AssaultRifle : BulletSpec
 		bulletLifeTime = 1.5f;
 		shootForce = 10f;
 		shootSpread = 1f;
+		
+		bulletCount = 30;
+		bulletName = "Assault Rifle";
 	}	
 }

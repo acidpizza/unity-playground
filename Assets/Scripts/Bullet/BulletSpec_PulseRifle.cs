@@ -13,5 +13,8 @@ public class BulletSpec_PulseRifle : BulletSpec
 		bulletLifeTime = 1f;
 		shootForce = 12f;
 		shootSpread = 0.5f;
+
+		bulletCount = 20;
+		bulletName = "Pulse Rifle";
 	}	
 }
