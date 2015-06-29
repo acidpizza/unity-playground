@@ -5,14 +5,16 @@ public class BulletSpec : MonoBehaviour
 {
 	public ParticleSystem hitParticlesPrefab;
 
-	public float timeBetweenBurst;				// Time between each burst
-	public int burstRounds;						// Number of rounds in a burst (0 means no burst)
-	public float timeBetweenBulletInBurst;		// Time between each burst bullet
+	public float timeBetweenBurst{ get; protected set;}	// Time between each burst
+	public int burstRounds{ get; protected set;}					// Number of rounds in a burst (0 means no burst)
+	public float timeBetweenBulletInBurst{ get; protected set;}	// Time between each burst bullet
 
-	public int damagePerShot;
-	public float bulletLifeTime;
-	public float shootForce;
-	public float shootSpread;
+	public int damagePerShot{ get; protected set;}
+	public float bulletLifeTime{ get; protected set;}
+	public float shootForce{ get; protected set;}
+	public float shootSpread{ get; protected set;}
+	public int bulletCount{ get; protected set;}
+	public string bulletName{ get; protected set;}
 
 	void OnCollisionEnter(Collision other) 
 	{
@@ -29,35 +31,5 @@ public class BulletSpec : MonoBehaviour
 
 
 		Destroy(gameObject);
-	}
-
-	public float GetTimeBetweenBurst()
-	{
-		return timeBetweenBurst;
-	}
-
-	public int GetBurstRounds()
-	{
-		return burstRounds;
-	}
-
-	public float GetTimeBetweenBulletInBurst()
-	{
-		return timeBetweenBulletInBurst;
-	}
-
-	public float GetBulletLifeTime()
-	{
-		return bulletLifeTime;
-	}
-
-	public float GetShootForce()
-	{
-		return shootForce;
-	}
-
-	public float GetShootSpread()
-	{
-		return shootSpread;
 	}
 }

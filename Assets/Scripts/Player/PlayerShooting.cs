@@ -25,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
 		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 		gunFlareParticles = GetComponent<ParticleSystem> ();
-		ChangeWeapon (bulletPrefab);
+		CollectWeapon (bulletPrefab);
 	}
 
 	void Update ()
@@ -67,18 +67,37 @@ public class PlayerShooting : MonoBehaviour
 		}
 	}
 
+	public void CollectWeapon(Rigidbody newBulletPrefab)
+	{
+		bulletPrefab = newBulletPrefab;
+		BulletSpec bulletSpec = bulletPrefab.GetComponent <BulletSpec> ();
+		if (bulletSpec != null) 
+		{
+			timeBetweenBurst = bulletSpec.timeBetweenBurst;
+			burstRounds = bulletSpec.burstRounds;
+			timeBetweenBulletInBurst = bulletSpec.timeBetweenBulletInBurst;
+			bulletLifeTime = bulletSpec.bulletLifeTime;
+			shootForce = bulletSpec.shootForce;
+			shootSpread = bulletSpec.shootSpread;
+		}
+		else
+		{
+			Debug.Log ("Cannot change weapon");
+		}
+	}
+
 	public void ChangeWeapon(Rigidbody newBulletPrefab)
 	{
 		bulletPrefab = newBulletPrefab;
 		BulletSpec bulletSpec = bulletPrefab.GetComponent <BulletSpec> ();
 		if (bulletSpec != null) 
 		{
-			timeBetweenBurst = bulletSpec.GetTimeBetweenBurst();
-			burstRounds = bulletSpec.GetBurstRounds();
-			timeBetweenBulletInBurst = bulletSpec.GetTimeBetweenBulletInBurst();
-			bulletLifeTime = bulletSpec.GetBulletLifeTime();
-			shootForce = bulletSpec.GetShootForce();
-			shootSpread = bulletSpec.GetShootSpread();
+			timeBetweenBurst = bulletSpec.timeBetweenBurst;
+			burstRounds = bulletSpec.burstRounds;
+			timeBetweenBulletInBurst = bulletSpec.timeBetweenBulletInBurst;
+			bulletLifeTime = bulletSpec.bulletLifeTime;
+			shootForce = bulletSpec.shootForce;
+			shootSpread = bulletSpec.shootSpread;
 		}
 		else
 		{

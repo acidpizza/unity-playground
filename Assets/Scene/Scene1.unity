@@ -7002,7 +7002,7 @@ Prefab:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11490330, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
-      propertyPath: healthSlider
+      propertyPath: healthUI
       value: 
       objectReference: {fileID: 257906210}
     m_RemovedComponents: []

@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public AudioClip deathClip;
-	public HealthSlider healthSlider;
+	public HealthUI healthUI;
 
     Animator anim;
     AudioSource playerAudio;
@@ -23,12 +23,7 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent <PlayerMovement> ();
         playerShooting = GetComponentInChildren <PlayerShooting> ();
         currentHealth = startingHealth;
-		healthSlider.healthSlider.value = startingHealth;
-    }
-
-
-    void Update ()
-    {
+		healthUI.SetHealth(startingHealth);
     }
 
 	public bool IsDead()
@@ -39,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage (int value)
     {
         currentHealth -= value;
-		healthSlider.TakeDamage (value);
+		healthUI.TakeDamage (value);
 
         playerAudio.Play ();
 
@@ -48,7 +43,6 @@ public class PlayerHealth : MonoBehaviour
             Death ();
         }
     }
-
 
     void Death ()
     {

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PowerUp : MonoBehaviour {
@@ -16,7 +16,7 @@ public class PowerUp : MonoBehaviour {
 		PlayerShooting playerShooting = other.GetComponentInChildren<PlayerShooting> ();
 		if(playerShooting != null)
 		{
-			playerShooting.ChangeWeapon(bulletStore);
+			playerShooting.CollectWeapon(bulletStore);
 			Destroy(transform.parent.gameObject);
 		}
 	}

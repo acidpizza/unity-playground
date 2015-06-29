@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 1;
     public AudioClip deathClip;
 	public string enemyName = "ZomBunny";
-	public GameManager gameManager;
+	GameManager gameManager;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -38,17 +38,17 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage (int amount)
     {
-        if(isDead)
-            return;
+        if(!isDead)
+		{
+	        enemyAudio.Play ();
 
-        enemyAudio.Play ();
-
-        currentHealth -= amount;
-        
-        if(currentHealth <= 0)
-        {
-            Death ();
-        }
+	        currentHealth -= amount;
+	        
+	        if(currentHealth <= 0)
+	        {
+	            Death ();
+	        }
+		}
     }
 
 	public bool IsDead()
