@@ -160,6 +160,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22454720}
+  - 114: {fileID: 11423490}
   m_Layer: 5
   m_Name: AmmoUI
   m_TagString: Untagged
@@ -319,6 +320,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11423490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a87dfb34f54fee46ad7da7ca6668678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponText: {fileID: 11412736}
+  ammoCountText: {fileID: 11434380}
 --- !u!114 &11432836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,7 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009b50d0080edbc4cae26e2f2e62d2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 11434914}
   damageImage: {fileID: 11457330}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: .100000001}

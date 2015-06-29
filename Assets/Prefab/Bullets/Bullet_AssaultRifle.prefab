@@ -143,6 +143,8 @@ MonoBehaviour:
   bulletLifeTime: 1.5
   shootForce: 10
   shootSpread: 1
+  bulletCount: 30
+  bulletName: Assault Rifle
 --- !u!136 &13682924
 CapsuleCollider:
   m_ObjectHideFlags: 1

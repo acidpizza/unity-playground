@@ -7001,6 +7001,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11497462, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
+      propertyPath: ammoUI
+      value: 
+      objectReference: {fileID: 2093540049}
     - target: {fileID: 11490330, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
       propertyPath: healthUI
       value: 
@@ -8313,6 +8317,12 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a4b268e7687a6de41832ec37bd64ea8c, type: 3}
   m_PrefabInternal: {fileID: 1221908512}
+--- !u!114 &2093540049 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11423490, guid: 65d7f15fd57a47e449141aea2ce13b97,
+    type: 2}
+  m_PrefabInternal: {fileID: 465768278}
+  m_Script: {fileID: 11500000, guid: 2a87dfb34f54fee46ad7da7ca6668678, type: 3}
 --- !u!1 &2094200233
 GameObject:
   m_ObjectHideFlags: 0

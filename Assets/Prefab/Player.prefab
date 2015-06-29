@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fcceb7d99928c4e80600a25e15e9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoUI: {fileID: 0}
   bulletPrefab: {fileID: 5495494, guid: b483bd7462add6240b78d7339091014e, type: 2}
 --- !u!136 &13605508
 CapsuleCollider:

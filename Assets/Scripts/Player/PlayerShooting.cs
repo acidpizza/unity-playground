@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerShooting : MonoBehaviour 
 {
-	struct AmmoTracker
+	public class AmmoTracker
 	{
 		public AmmoTracker(Rigidbody newBulletPrefab)
 		{
@@ -31,7 +31,6 @@ public class PlayerShooting : MonoBehaviour
 				if(bulletSpec.bulletName.Equals(newBulletSpec.bulletName))
 				{
 					bulletCount += newBulletSpec.bulletCount;
-					// TODO: Update Ammo Count on UI
 					return true;
 				}
 			}
@@ -53,7 +52,6 @@ public class PlayerShooting : MonoBehaviour
 			if(!unlimitedAmmo && bulletCount > 0)
 			{
 				bulletCount --;
-				// TODO: Update Ammo Count on UI
 			}
 		}
 
@@ -63,11 +61,13 @@ public class PlayerShooting : MonoBehaviour
 		public bool unlimitedAmmo;
 	};
 
+	public AmmoUI ammoUI;
+	public Rigidbody bulletPrefab;
+	BulletSpec bulletSpec;
+
 	List<AmmoTracker> ammoStore = new List<AmmoTracker> ();
 	int ammoStoreIndex = 0;
 	AmmoTracker currentAmmoTracker;
-	Rigidbody bulletPrefab;
-	BulletSpec bulletSpec;
 
 	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
 	int currentBurstCount = 0; // Track how many burst bullets have been shot so far
@@ -89,6 +89,15 @@ public class PlayerShooting : MonoBehaviour
 	void Update ()
 	{
 		timer += Time.deltaTime;
+
+		if(Input.GetButtonDown ("ChangeWeaponRight"))
+		{
+			ChangeWeapon (true);
+		}
+		else if(Input.GetButtonDown ("ChangeWeaponLeft"))
+		{
+			ChangeWeapon (false);
+		}
 
 		if(Input.GetButton ("Fire1") && Time.timeScale != 0) // Want to fire and game is not paused
 		{
@@ -127,45 +136,58 @@ public class PlayerShooting : MonoBehaviour
 
 	public void CollectWeapon(Rigidbody newBulletPrefab)
 	{
-		foreach (AmmoTracker ammoTracker in ammoStore)
+		for(int i = 0; i < ammoStore.Count; i++)
 		{
+			AmmoTracker ammoTracker = ammoStore[i];
 			if(ammoTracker.AddAmmo(newBulletPrefab))
 			{
-				bulletPrefab = ammoTracker.bulletPrefab;
-				bulletSpec = ammoTracker.bulletSpec;
-
-				// TODO: Update UI
+				if(ammoStoreIndex == i)
+				{
+					ammoUI.UpdateAmmo(ammoTracker); // Only update UI if currently showing this gun
+				}
 				return;
 			}
 		}
 
 		{
-			// Cannot find, add new AmmoTracker -> UI does not need to be updated.
+			// Cannot find, add new AmmoTracker
 			ammoStore.Add(new AmmoTracker(newBulletPrefab));
 			AmmoTracker ammoTracker = ammoStore[ammoStore.Count - 1];
-			bulletPrefab = ammoTracker.bulletPrefab;
-			bulletSpec = ammoTracker.bulletSpec;
-			if (bulletSpec == null) 
+
+			// Update currentAmmoTracker and UI if this is the 1st weapon collected
+			if(ammoStoreIndex == ammoStore.Count - 1)
 			{
-				Debug.Log ("Cannot collect weapon");
+				currentAmmoTracker = ammoTracker;
+				bulletPrefab = ammoTracker.bulletPrefab;
+				bulletSpec = ammoTracker.bulletSpec;
+				ammoUI.UpdateWeapon(currentAmmoTracker);
 			}
 		}
 	}
 
-	public void ChangeWeapon()
+	// changeWeapon_input: Positive = change up. Negative = change down.
+	public void ChangeWeapon(bool changeWeapon_input)
 	{
-		ammoStoreIndex = (ammoStoreIndex + 1) % ammoStore.Count;
-		currentAmmoTracker = ammoStore [ammoStoreIndex];
-		bulletPrefab = currentAmmoTracker.bulletPrefab;
-		bulletSpec = currentAmmoTracker.bulletSpec;
-		if (bulletSpec != null) 
+		if (changeWeapon_input) 
 		{
-			//TODO: Update UI
+			ammoStoreIndex = (ammoStoreIndex + 1) % ammoStore.Count;
 		}
 		else
 		{
-			Debug.Log ("Cannot change weapon");
+			if(ammoStoreIndex == 0)
+			{
+				ammoStoreIndex = ammoStore.Count - 1;
+			}
+			else
+			{
+				ammoStoreIndex--;
+			}
 		}
+
+		currentAmmoTracker = ammoStore [ammoStoreIndex];
+		bulletPrefab = currentAmmoTracker.bulletPrefab;
+		bulletSpec = currentAmmoTracker.bulletSpec;
+		ammoUI.UpdateWeapon(currentAmmoTracker);
 	}
 
 	void Shoot ()
@@ -190,6 +212,7 @@ public class PlayerShooting : MonoBehaviour
 			Destroy (bullet.gameObject, bulletSpec.bulletLifeTime);
 
 			currentAmmoTracker.ExpendAmmo();
+			ammoUI.UpdateAmmo(currentAmmoTracker);
 		}
 	}
 

@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
 		if(enemyName == "ZomBunny")
 		{
 			count_zombunny++;
-			if(count_zombunny == 5)
+			if(count_zombunny == 1)
 			{
 				DropPowerUp(powerup_AssaultRifle, enemyPosition);
 			}
-			else if(count_zombunny == 10)
+			else if(count_zombunny == 2)
 			{
 				count_zombunny = 0;
 				DropPowerUp(powerup_PulseRifle, enemyPosition);
