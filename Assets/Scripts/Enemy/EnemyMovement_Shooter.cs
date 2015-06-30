@@ -7,7 +7,18 @@ public class EnemyMovement_Shooter : MonoBehaviour
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
     NavMeshAgent nav;
+	Animator anim;
 
+	bool playerInRange;
+	public float rotateSpeed = 10f;
+
+	// Line Of Sight detection
+	int shootableByEnemyMask;
+	Ray lineOfSightRay;
+	RaycastHit playerRayHit;
+	float range = 100f;
+
+//	LineRenderer gunLine;
 
     void Awake ()
     {
@@ -15,6 +26,10 @@ public class EnemyMovement_Shooter : MonoBehaviour
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent <EnemyHealth> ();
         nav = GetComponent <NavMeshAgent> ();
+		anim = GetComponent <Animator> ();
+
+		shootableByEnemyMask = LayerMask.GetMask ("ShootableByEnemy");
+//		gunLine = GetComponent<LineRenderer> ();
     }
 
 
@@ -22,11 +37,95 @@ public class EnemyMovement_Shooter : MonoBehaviour
     {
         if(!enemyHealth.IsDead () && !playerHealth.IsDead ())
         {
-            nav.SetDestination (player.position);
+			if(playerInRange)
+			{
+				lineOfSightRay.origin = transform.position + new Vector3(0,0.2f,0);
+				lineOfSightRay.direction = player.position - transform.position;
+
+            	if(HasLineOfSightToPlayer())
+				{
+					nav.enabled = false;
+					if(TurnAndIsFacingPlayer())
+					{
+						anim.SetBool("PlayerInSight", true);
+						Shoot ();
+					}
+					else
+					{
+						anim.SetBool("PlayerInSight", false);
+					}
+				}
+				else
+				{
+					// Player is in range but is blocked. Continue chasing to get line of sight.
+					anim.SetBool("PlayerInSight", false);
+					nav.enabled = true;
+					nav.SetDestination (player.position);
+				}
+			}
+			else
+			{
+				// Chase the player until player is in range
+				anim.SetBool("PlayerInSight", false);
+				nav.enabled = true;
+				nav.SetDestination (player.position);
+			}
         }
         else
         {
+			// Enemy of Player dead
             nav.enabled = false;
+			if(playerHealth.IsDead())
+			{
+				anim.SetTrigger("PlayerDead");
+			}
         }
     }
+
+	void OnTriggerEnter (Collider other)
+	{
+		if(other.gameObject == player.gameObject)
+		{
+			playerInRange = true;
+		}
+	}
+	
+	
+	void OnTriggerExit (Collider other)
+	{
+		if(other.gameObject == player.gameObject)
+		{
+			playerInRange = false;
+//			gunLine.enabled = false;
+		}
+	}
+
+	bool HasLineOfSightToPlayer()
+	{
+		return Physics.Raycast (lineOfSightRay, out playerRayHit, range, shootableByEnemyMask) && playerRayHit.transform.tag == "Player";
+		/*
+		if(Physics.Raycast (lineOfSightRay, out playerRayHit, range, shootableByEnemyMask))
+		{
+			gunLine.enabled = true;
+			gunLine.SetPosition (0, transform.position + new Vector3(0,0.2f,0));
+			gunLine.SetPosition (1, playerRayHit.point);
+
+			return playerRayHit.transform.tag == "Player";
+		}
+		gunLine.enabled = false;
+		return false;
+		*/
+	}
+
+	bool TurnAndIsFacingPlayer()
+	{
+		Quaternion wantedRot=Quaternion.LookRotation(lineOfSightRay.direction);
+		transform.rotation=Quaternion.Slerp(transform.rotation, wantedRot, rotateSpeed*Time.deltaTime);
+		return (Quaternion.Angle (transform.rotation, wantedRot) < 5);
+	}
+
+	void Shoot()
+	{
+		
+	}
 }
