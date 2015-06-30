@@ -17,8 +17,9 @@ public class EnemyMovement_Shooter : MonoBehaviour
 	Ray lineOfSightRay;
 	RaycastHit playerRayHit;
 	float range = 100f;
+	//	LineRenderer gunLine;
 
-//	LineRenderer gunLine;
+	public EnemyShooting enemyShooting;
 
     void Awake ()
     {
@@ -48,17 +49,20 @@ public class EnemyMovement_Shooter : MonoBehaviour
 					if(TurnAndIsFacingPlayer())
 					{
 						anim.SetBool("PlayerInSight", true);
-						Shoot ();
+						enemyShooting.IsShooting = true;
 					}
 					else
 					{
 						anim.SetBool("PlayerInSight", false);
+						enemyShooting.IsShooting = false;
 					}
 				}
 				else
 				{
 					// Player is in range but is blocked. Continue chasing to get line of sight.
 					anim.SetBool("PlayerInSight", false);
+					enemyShooting.IsShooting = false;
+
 					nav.enabled = true;
 					nav.SetDestination (player.position);
 				}
@@ -67,6 +71,8 @@ public class EnemyMovement_Shooter : MonoBehaviour
 			{
 				// Chase the player until player is in range
 				anim.SetBool("PlayerInSight", false);
+				enemyShooting.IsShooting = false;
+
 				nav.enabled = true;
 				nav.SetDestination (player.position);
 			}
@@ -78,6 +84,7 @@ public class EnemyMovement_Shooter : MonoBehaviour
 			if(playerHealth.IsDead())
 			{
 				anim.SetTrigger("PlayerDead");
+				enemyShooting.IsShooting = false;
 			}
         }
     }
@@ -122,10 +129,5 @@ public class EnemyMovement_Shooter : MonoBehaviour
 		Quaternion wantedRot=Quaternion.LookRotation(lineOfSightRay.direction);
 		transform.rotation=Quaternion.Slerp(transform.rotation, wantedRot, rotateSpeed*Time.deltaTime);
 		return (Quaternion.Angle (transform.rotation, wantedRot) < 5);
-	}
-
-	void Shoot()
-	{
-		
 	}
 }

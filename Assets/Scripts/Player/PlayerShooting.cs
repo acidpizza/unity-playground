@@ -109,7 +109,6 @@ public class PlayerShooting : MonoBehaviour
 					// In the midst of a burst
 					currentBurstCount++;
 					Shoot ();
-					Invoke ("DisableEffects", effectsDisplayTime);
 				}
 				else if(currentBurstCount >= bulletSpec.burstRounds)
 				{
@@ -118,7 +117,6 @@ public class PlayerShooting : MonoBehaviour
 					{
 						currentBurstCount = 1;
 						Shoot ();
-						Invoke ("DisableEffects", effectsDisplayTime);
 					}
 				}
 			}
@@ -128,7 +126,6 @@ public class PlayerShooting : MonoBehaviour
 				if(timer >= bulletSpec.timeBetweenBurst)
 				{
 					Shoot ();
-					Invoke ("DisableEffects", effectsDisplayTime);
 				}
 			}
 		}
@@ -195,10 +192,7 @@ public class PlayerShooting : MonoBehaviour
 		if(currentAmmoTracker.AmmoAvailable())
 		{
 			timer = 0f;
-			gunAudio.Play ();
-			gunLight.enabled = true;
-			gunFlareParticles.Stop ();
-			gunFlareParticles.Play ();
+			EnableEffects();
 
 			Transform bulletTransform = transform;
 			if(bulletSpec.shootSpread != 0)
@@ -213,9 +207,19 @@ public class PlayerShooting : MonoBehaviour
 
 			currentAmmoTracker.ExpendAmmo();
 			ammoUI.UpdateAmmo(currentAmmoTracker);
+
+			Invoke ("DisableEffects", effectsDisplayTime);
 		}
 	}
 
+	void EnableEffects()
+	{
+		gunAudio.Play ();
+		gunLight.enabled = true;
+		gunFlareParticles.Stop ();
+		gunFlareParticles.Play ();
+	}
+	
 	void DisableEffects ()
 	{
 		gunLight.enabled = false;

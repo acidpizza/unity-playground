@@ -2189,11 +2189,11 @@ Prefab:
       objectReference: {fileID: 399515771}
     - target: {fileID: 22478250, guid: 65d7f15fd57a47e449141aea2ce13b97, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22478250, guid: 65d7f15fd57a47e449141aea2ce13b97, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65d7f15fd57a47e449141aea2ce13b97, type: 2}
@@ -7401,6 +7401,10 @@ Prefab:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 257906210}
+    - target: {fileID: 102790, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
   m_IsPrefabParent: 0
