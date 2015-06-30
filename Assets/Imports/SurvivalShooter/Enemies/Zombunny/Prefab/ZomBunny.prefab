@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 402038}
   - 137: {fileID: 13702196}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ZomBunny_texture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ GameObject:
   - 114: {fileID: 11441242}
   - 114: {fileID: 11491512}
   - 114: {fileID: 11458980}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ZomBunny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,6 +300,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Speed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

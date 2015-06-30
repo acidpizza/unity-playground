@@ -89,7 +89,7 @@ TrailRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f474d0ef6a7d2e34d9f6cac42bf29de4, type: 2}
+  - {fileID: 2100000, guid: 411ccb402d9c9174881ffc8eaf635e33, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   timeBetweenBurst: 1.20000005
   burstRounds: 3
   timeBetweenBulletInBurst: .100000001
-  damagePerShot: 40
+  damagePerShot: 10
   bulletLifeTime: 1.5
   shootForce: 10
   shootSpread: 1
@@ -186,7 +186,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 411ccb402d9c9174881ffc8eaf635e33, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Time
       value: .5
@@ -274,6 +274,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: .649999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damagePerShot
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
