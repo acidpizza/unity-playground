@@ -14,7 +14,6 @@ public class EnemyShooting : MonoBehaviour {
 	float timer = 0f;
 	AudioSource gunAudio;
 	float effectsDisplayTime = 0.03f;
-	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
 	EnemyBulletSpec bulletSpec; // only need one instance of the 2 bullets
 
 	// Use this for initialization

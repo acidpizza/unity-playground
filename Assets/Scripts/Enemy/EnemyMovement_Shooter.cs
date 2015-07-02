@@ -79,12 +79,13 @@ public class EnemyMovement_Shooter : MonoBehaviour
         }
         else
         {
-			// Enemy of Player dead
+			// Enemy or Player dead
             nav.enabled = false;
+			enemyShooting.IsShooting = false;
+
 			if(playerHealth.IsDead())
 			{
 				anim.SetTrigger("PlayerDead");
-				enemyShooting.IsShooting = false;
 			}
         }
     }
