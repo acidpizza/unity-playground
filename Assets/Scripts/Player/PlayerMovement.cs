@@ -4,6 +4,8 @@ public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;		// Speed of player
 	public float rotateSpeed = 6f; 	// Speed of rotation of player
+	public Transform gunBarrelEnd;
+	public Transform crossHairTransform;
 	//public MeshFilter crosshair;
 
 	Vector3 movement;			// Vector to store direction of player's movement
@@ -23,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 		// Set up references
 		anim = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
+
+		Cursor.visible = false;
 	}
 
 	void FixedUpdate()
@@ -98,6 +102,13 @@ public class PlayerMovement : MonoBehaviour
 			// Convert vector3 to quarternion
 			Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
 			playerRigidbody.MoveRotation(newRotation);
+
+			// Add gunBarrelEnd offset from player to floorHit to get correct position of crossHair.
+			Vector3 localOffset = new Vector3(gunBarrelEnd.localPosition.x,0,0);
+			Vector3 worldOffset = transform.rotation * localOffset;
+			Vector3 crossHairPosition = floorHit.point + worldOffset;
+			crossHairPosition.y = gunBarrelEnd.position.y;
+			crossHairTransform.position = crossHairPosition;
 		}
 	}
 #endregion

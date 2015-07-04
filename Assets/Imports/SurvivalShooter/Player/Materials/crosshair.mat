@@ -26,11 +26,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: .25
       data:
         first:
           name: _Occlusion
-        second: 7.5
+        second: 0
       data:
         first:
           name: _SquashAmount
@@ -38,11 +38,11 @@ Material:
       data:
         first:
           name: _AO
-        second: 2.4000001
+        second: 0
       data:
         first:
           name: _BaseLight
-        second: .349999994
+        second: .270000011
     m_Colors:
       data:
         first:
