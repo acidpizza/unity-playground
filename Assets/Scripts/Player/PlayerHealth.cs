@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int startingHealth = 100;
     public AudioClip deathClip;
 	public HealthUI healthUI;
+	public GameOverManager gameOverManager;
 
     Animator anim;
     AudioSource playerAudio;
@@ -55,5 +56,12 @@ public class PlayerHealth : MonoBehaviour
 
         playerMovement.enabled = false;
         playerShooting.enabled = false;
+
+		Invoke ("TriggerGameOverUI", 3f);
     }
+
+	void TriggerGameOverUI()
+	{
+		gameOverManager.GameOver ();
+	}
 }

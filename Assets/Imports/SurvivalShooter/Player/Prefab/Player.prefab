@@ -416,6 +416,7 @@ MonoBehaviour:
   startingHealth: 100
   deathClip: {fileID: 8300000, guid: c282a1f02ee55f141af52cb29a7ce54d, type: 3}
   healthUI: {fileID: 0}
+  gameOverManager: {fileID: 0}
 --- !u!114 &11497462
 MonoBehaviour:
   m_ObjectHideFlags: 1
