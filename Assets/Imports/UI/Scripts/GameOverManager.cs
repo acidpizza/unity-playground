@@ -17,6 +17,6 @@ public class GameOverManager : MonoBehaviour
 
 	void RestartApplication()
 	{
-		Application.LoadLevel (Application.loadedLevel);
+		Application.LoadLevel ("StartMenu");
 	}
 }
