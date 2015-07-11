@@ -45,6 +45,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+	public void GainHealth(int value)
+	{
+		if (currentHealth + value > 100)
+		{
+			currentHealth = 100;
+		}
+		else
+		{
+			currentHealth += value;
+		}
+		healthUI.SetHealth (currentHealth);
+	}
+
     void Death ()
     {
         isDead = true;

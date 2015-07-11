@@ -158,6 +158,7 @@ public class PlayerShooting : MonoBehaviour
 				bulletPrefab = ammoTracker.bulletPrefab;
 				bulletSpec = ammoTracker.bulletSpec;
 				ammoUI.UpdateWeapon(currentAmmoTracker);
+				gunAudio.clip = bulletSpec.shootAudio;
 			}
 		}
 	}
@@ -185,6 +186,7 @@ public class PlayerShooting : MonoBehaviour
 		bulletPrefab = currentAmmoTracker.bulletPrefab;
 		bulletSpec = currentAmmoTracker.bulletSpec;
 		ammoUI.UpdateWeapon(currentAmmoTracker);
+		gunAudio.clip = bulletSpec.shootAudio;
 	}
 
 	void Shoot ()

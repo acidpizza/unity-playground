@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     
 	public Transform powerup_AssaultRifle;
 	public Transform powerup_PulseRifle;
+	public Transform powerup_Health;
+
 	int count_zombunny;
+	int count_zombear;
 
 
     void Awake ()
@@ -19,6 +22,7 @@ public class GameManager : MonoBehaviour
 		AddScore (0, "", transform);
 
 		count_zombunny = 0;
+		count_zombear = 0;
     }
 
 	public void AddScore(int value, string enemyName, Transform enemyPosition)
@@ -37,6 +41,19 @@ public class GameManager : MonoBehaviour
 			{
 				count_zombunny = 0;
 				DropPowerUp(powerup_PulseRifle, enemyPosition);
+			}
+		}
+		else if(enemyName == "ZomBear")
+		{
+			count_zombear++;
+			if(count_zombear == 2)
+			{
+				//DropPowerUp(powerup_AssaultRifle, enemyPosition);
+			}
+			else if(count_zombear == 4)
+			{
+				count_zombear = 0;
+				DropPowerUp(powerup_Health, enemyPosition);
 			}
 		}
 	}

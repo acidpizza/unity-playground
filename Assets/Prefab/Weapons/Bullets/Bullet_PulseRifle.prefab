@@ -157,6 +157,7 @@ MonoBehaviour:
   shootSpread: .5
   bulletCount: 20
   bulletName: Pulse Rifle
+  shootAudio: {fileID: 8300000, guid: 27d5ec3f3da93814bbe7a3a30b75df8b, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -4302,7 +4302,7 @@ Transform:
   - {fileID: 58740365}
   - {fileID: 30033048}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1001 &887518033
 Prefab:
   m_ObjectHideFlags: 0
@@ -5272,6 +5272,10 @@ Prefab:
       propertyPath: gameOverManager
       value: 
       objectReference: {fileID: 2075073742}
+    - target: {fileID: 8287838, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
+      propertyPath: m_Volume
+      value: .400000006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 975eb8cd41a5fcd47939069a6f78f541, type: 2}
   m_IsPrefabParent: 0
@@ -7098,6 +7102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerup_AssaultRifle: {fileID: 433172, guid: e03a22edd02246647888fa70ac881eb4, type: 2}
   powerup_PulseRifle: {fileID: 433172, guid: 3bbf42efb91fd1b4f97c9c0b80288156, type: 2}
+  powerup_Health: {fileID: 400000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
 --- !u!4 &1496171719
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class BulletSpec : MonoBehaviour
 	public float shootSpread;
 	public int bulletCount;
 	public string bulletName;
+	public AudioClip shootAudio;
 
 	void OnCollisionEnter(Collision other) 
 	{
