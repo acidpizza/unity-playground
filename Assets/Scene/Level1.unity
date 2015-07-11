@@ -5289,7 +5289,7 @@ GameObject:
   - 4: {fileID: 1085141355}
   - 114: {fileID: 1085141356}
   m_Layer: 0
-  m_Name: EnemySpawn
+  m_Name: EnemySpawn_melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5320,7 +5320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 399515771}
   enemy: {fileID: 168840, guid: 81622472bac3ebb42985629d059f097c, type: 2}
-  spawnTime: 3
+  spawnTime: 3.5
   spawnPoints:
   - {fileID: 1523876570}
   - {fileID: 2027953072}
@@ -6286,7 +6286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 399515771}
   enemy: {fileID: 100000, guid: 7bca9c2cd581dbb4f971ad087c21f5f9, type: 2}
-  spawnTime: 18
+  spawnTime: 17
   spawnPoints:
   - {fileID: 1523876570}
   - {fileID: 2027953072}
@@ -9538,7 +9538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 399515771}
   enemy: {fileID: 181816, guid: 749b5d73661395446aa50b45dd0ba7a3, type: 2}
-  spawnTime: 12
+  spawnTime: 14
   spawnPoints:
   - {fileID: 1523876570}
   - {fileID: 2027953072}

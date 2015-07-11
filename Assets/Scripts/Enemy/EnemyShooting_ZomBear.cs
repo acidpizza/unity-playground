@@ -13,15 +13,15 @@ public class EnemyShooting_ZomBear : EnemyShooting
 	public float maxTimeBetweenCast;
 	public float magicLifeTime;
 
+	public EnemyHealth enemyHealth;
+
 	float timer;
-	AudioSource magicCastAudio;
 
 	// Use this for initialization
 	void Awake () 
 	{
 		player = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerRigidBody = player.gameObject.GetComponent<Rigidbody> ();
-		//magicCastAudio = GetComponent<AudioSource> ();
 		timer = maxTimeBetweenCast;
 	}
 	
@@ -33,6 +33,11 @@ public class EnemyShooting_ZomBear : EnemyShooting
 		if(IsShooting && timer >= Random.Range(minTimeBetweenCast, maxTimeBetweenCast))
 		{
 			Cast ();
+		}
+
+		if(enemyHealth.IsDead())
+		{
+			DisableEffects();
 		}
 	}
 
@@ -50,8 +55,12 @@ public class EnemyShooting_ZomBear : EnemyShooting
 
 	void EnableEffects()
 	{
-		//magicCastAudio.Play ();
 		magicEnchantParticles.Stop ();
 		magicEnchantParticles.Play ();
+	}
+
+	void DisableEffects()
+	{
+		magicEnchantParticles.Stop ();
 	}
 }

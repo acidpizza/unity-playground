@@ -360,6 +360,7 @@ MonoBehaviour:
   minTimeBetweenCast: 4.5
   maxTimeBetweenCast: 6.5
   magicLifeTime: 4
+  enemyHealth: {fileID: 11400002}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -4615,6 +4616,10 @@ Prefab:
       propertyPath: startingHealth
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyHealth
+      value: 
+      objectReference: {fileID: 11400002}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}

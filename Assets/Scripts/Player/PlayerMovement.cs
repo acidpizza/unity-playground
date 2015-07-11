@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		Debug.Log ("Velocity: " + speed);
 		if(slowState == SlowState.Normal)
 		{
 			playerMaterial.color = Color.Lerp (playerMaterial.color, normalColor, 10f * Time.deltaTime);
