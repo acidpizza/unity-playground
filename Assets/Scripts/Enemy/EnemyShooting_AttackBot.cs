@@ -20,6 +20,7 @@ public class EnemyShooting_AttackBot : EnemyShooting
 	{
 		gunAudio = GetComponent<AudioSource> ();
 		bulletSpec = bulletPrefabLeft.GetComponent<EnemyBulletSpec> ();
+		timer = bulletSpec.timeBetweenBurst;
 	}
 	
 	// Update is called once per frame

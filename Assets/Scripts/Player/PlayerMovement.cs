@@ -2,11 +2,13 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-	public float speed = 6f;		// Speed of player
-	public float rotateSpeed = 6f; 	// Speed of rotation of player
+	public float acceleration = 30f; 	// Acceleration of player
+	public float speed = 5f;			// Speed of player
+	public float rotateSpeed = 5f; 		// Speed of rotation of player
 	public Transform gunBarrelEnd;
 	public Transform crossHairTransform;
-	//public MeshFilter crosshair;
+	public SkinnedMeshRenderer playerRenderer;
+	Material playerMaterial;
 
 	Vector3 movement;			// Vector to store direction of player's movement
 	Quaternion rotation;		// Quaternion to store direction of player's rotation
@@ -16,6 +18,16 @@ public class PlayerMovement : MonoBehaviour
 	int floorMask;				// Layer mask so that a ray can be cast just at gameobjects on the floor layer
 	float camRayLength = 100f;	// Length of ray from camera into the scene
 
+	// Track slow from magic
+	int magicHitCount = 0;
+	enum SlowState
+	{
+		Normal, OneSlow, TwoSlow
+	};
+	Color normalColor = new Color(1, 1, 1, 1);
+	Color oneSlowColor = new Color(150f/255, 1, 150f/255, 1);
+	Color twoSlowColor = new Color(1, 150f/255, 150f/255, 1);
+	SlowState slowState = SlowState.Normal;
 
 	void Awake()
 	{
@@ -25,8 +37,26 @@ public class PlayerMovement : MonoBehaviour
 		// Set up references
 		anim = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
+		playerMaterial = playerRenderer.material;
 
 		Cursor.visible = false;
+	}
+
+	void Update()
+	{
+		Debug.Log ("Velocity: " + speed);
+		if(slowState == SlowState.Normal)
+		{
+			playerMaterial.color = Color.Lerp (playerMaterial.color, normalColor, 10f * Time.deltaTime);
+		}
+		else if(slowState == SlowState.OneSlow)
+		{
+			playerMaterial.color = Color.Lerp (playerMaterial.color, oneSlowColor, 10f * Time.deltaTime);
+		}
+		else if(slowState == SlowState.TwoSlow)
+		{
+			playerMaterial.color = Color.Lerp (playerMaterial.color, twoSlowColor, 10f * Time.deltaTime);
+		}
 	}
 
 	void FixedUpdate()
@@ -34,6 +64,37 @@ public class PlayerMovement : MonoBehaviour
 		//KeyboardControl();
 		KeyboardAndMouseControl ();
 	}
+
+	public void MagicSlowHit()
+	{
+		if (magicHitCount == 0) // maximum 2 stack on magic slow
+		{
+			speed -= 0.7f; 
+			slowState = SlowState.OneSlow;
+		}
+		else if (magicHitCount == 1 )
+		{
+			speed -= 0.4f; 
+			slowState = SlowState.TwoSlow;
+		}
+		magicHitCount++;
+	}
+
+	public void MagicSlowRelease()
+	{
+		if(magicHitCount == 1)
+		{
+			speed += 0.7f;
+			slowState = SlowState.Normal;
+		}
+		else if(magicHitCount == 2)
+		{
+			speed += 0.4f;
+			slowState = SlowState.OneSlow;
+		}
+		magicHitCount--;
+	}
+
 
 #region KeyboardOnly
 
@@ -80,8 +141,10 @@ public class PlayerMovement : MonoBehaviour
 	void MovementWorldAxes_Keyboard(float h, float v)
 	{
 		movement.Set (h, 0f, v);
-		movement = movement.normalized * speed * Time.deltaTime;
-		playerRigidbody.MovePosition (transform.position + movement);
+		//movement = movement.normalized * speed * Time.deltaTime;
+		//playerRigidbody.MovePosition (transform.position + movement);
+		playerRigidbody.AddForce (movement.normalized * acceleration);
+		playerRigidbody.velocity = Vector3.ClampMagnitude (playerRigidbody.velocity, speed);
 	}
 
 	void Turn_Mouse()

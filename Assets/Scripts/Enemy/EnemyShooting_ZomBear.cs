@@ -3,20 +3,26 @@ using System.Collections;
 
 public class EnemyShooting_ZomBear : EnemyShooting 
 {	
-	public Rigidbody magicPrefab;
-	public Light magicLight;
-	public ParticleSystem magicParticles;
+	Transform player;
+	Rigidbody playerRigidBody;
 
-	float timer = 0f;
-	AudioSource magicAudio;
-	float effectsDisplayTime = 0.03f;
-	EnemyBulletSpec bulletSpec; // only need one instance of the 2 bullets
+	public ParticleSystem magicEnchantParticles;
+	public ParticleSystem magicCastParticlesPrefab;
+
+	public float minTimeBetweenCast;
+	public float maxTimeBetweenCast;
+	public float magicLifeTime;
+
+	float timer;
+	AudioSource magicCastAudio;
 
 	// Use this for initialization
 	void Awake () 
 	{
-		magicAudio = GetComponent<AudioSource> ();
-		bulletSpec = magicPrefab.GetComponent<EnemyBulletSpec> ();
+		player = GameObject.FindGameObjectWithTag ("Player").transform;
+		playerRigidBody = player.gameObject.GetComponent<Rigidbody> ();
+		//magicCastAudio = GetComponent<AudioSource> ();
+		timer = maxTimeBetweenCast;
 	}
 	
 	// Update is called once per frame
@@ -24,37 +30,28 @@ public class EnemyShooting_ZomBear : EnemyShooting
 	{
 		timer += Time.deltaTime;
 
-		if(IsShooting && timer >= bulletSpec.timeBetweenBurst)
+		if(IsShooting && timer >= Random.Range(minTimeBetweenCast, maxTimeBetweenCast))
 		{
-			Shoot ();
+			Cast ();
 		}
 	}
 
-	void Shoot()
+	void Cast()
 	{
 		timer = 0f;
 		EnableEffects ();
 
-		Vector3 localOffset = new Vector3(magicPrefab.transform.position.x,0,0);
-		Vector3 worldOffset = transform.rotation * localOffset;
-		Vector3 bulletPosition = transform.position + worldOffset;
-		Rigidbody bulletLeft = Instantiate (magicPrefab, bulletPosition, transform.rotation * magicPrefab.transform.rotation) as Rigidbody;
-		bulletLeft.AddForce(transform.forward * bulletSpec.shootForce, ForceMode.Impulse);
-		Destroy (bulletLeft.gameObject, bulletSpec.bulletLifeTime);
-
-		Invoke ("DisableEffects", effectsDisplayTime);	
+		Vector3 anticpatedLocation = player.position + playerRigidBody.velocity * 1.2f;
+		ParticleSystem magicCastParticles = Instantiate (magicCastParticlesPrefab, anticpatedLocation, magicCastParticlesPrefab.transform.rotation) as ParticleSystem;
+		magicCastParticles.Stop ();
+		magicCastParticles.Play ();
+		Destroy (magicCastParticles.gameObject, magicLifeTime);
 	}
 
 	void EnableEffects()
 	{
-		magicAudio.Play ();
-		magicLight.enabled = true;
-		magicParticles.Stop ();
-		magicParticles.Play ();
-	}
-
-	void DisableEffects ()
-	{
-		magicLight.enabled = false;
+		//magicCastAudio.Play ();
+		magicEnchantParticles.Stop ();
+		magicEnchantParticles.Play ();
 	}
 }
