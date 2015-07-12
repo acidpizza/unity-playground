@@ -31,7 +31,22 @@ public class BulletSpec : MonoBehaviour
 		EnemyHealth enemyHealth = other.collider.GetComponent <EnemyHealth> ();
         if(enemyHealth != null)
         {
-            enemyHealth.TakeDamage (damagePerShot);
+			// Special cases
+			if(enemyHealth.enemyName == "ZomBear" && bulletName == "Pulse Rifle")
+			{
+				enemyHealth.TakeDamage (damagePerShot/3); // ZomBear has resistance to pulse rifle
+
+			}
+			else if(enemyHealth.enemyName == "AttackBot" && (bulletName == "Assault Rifle" || bulletName == "Pistol"))
+			{
+				enemyHealth.TakeDamage (damagePerShot/2); // AttackBot has resistance to mechanical bullets
+				
+			}
+			else
+			{
+				enemyHealth.TakeDamage (damagePerShot);
+			}
+
         }
 
 
