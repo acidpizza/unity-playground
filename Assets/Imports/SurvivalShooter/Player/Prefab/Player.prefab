@@ -255,7 +255,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5dd916a9f9ad25442bf719de04ba9118, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .200000003
+  m_Volume: .400000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -465,6 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoUI: {fileID: 0}
   bulletPrefab: {fileID: 5495494, guid: b483bd7462add6240b78d7339091014e, type: 2}
+  noAmmoAudio: {fileID: 8300000, guid: 010995e30caecc945b049b6be2adb251, type: 3}
 --- !u!136 &13605508
 CapsuleCollider:
   m_ObjectHideFlags: 1
