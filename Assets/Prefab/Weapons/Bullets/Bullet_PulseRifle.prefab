@@ -157,7 +157,10 @@ MonoBehaviour:
   shootSpread: .5
   bulletCount: 20
   bulletName: Pulse Rifle
-  shootAudio: {fileID: 8300000, guid: 27d5ec3f3da93814bbe7a3a30b75df8b, type: 3}
+  shootAudio: {fileID: 8300000, guid: af14adff9c227c14b866829407e7f466, type: 3}
+  isProjectile: 0
+  liftForce: 0
+  forwardTorque: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -267,6 +270,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .0700000003
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shootAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: af14adff9c227c14b866829407e7f466, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154898}

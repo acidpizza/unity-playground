@@ -17,7 +17,11 @@ public class BulletSpec : MonoBehaviour
 	public string bulletName;
 	public AudioClip shootAudio;
 
-	void OnCollisionEnter(Collision other) 
+	public bool isProjectile = false;
+	public float liftForce = 0f;
+	public float forwardTorque = 0f;
+
+	protected virtual void OnCollisionEnter(Collision other) 
 	{
 		ParticleSystem hitParticles = Instantiate (hitParticlesPrefab, other.contacts [0].point, hitParticlesPrefab.transform.rotation) as ParticleSystem;
 		hitParticles.Play ();

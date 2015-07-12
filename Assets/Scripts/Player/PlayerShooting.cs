@@ -81,12 +81,14 @@ public class PlayerShooting : MonoBehaviour
 	ParticleSystem gunFlareParticles;
 	float effectsDisplayTime = 0.03f;
 	float timeBetweenEmptyShots = 0.5f;
+	Rigidbody playerRigidBody;
 
 	void Awake ()
 	{
 		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 		gunFlareParticles = GetComponent<ParticleSystem> ();
+		playerRigidBody = transform.parent.GetComponent<Rigidbody> ();
 		CollectWeapon (bulletPrefab); // Equip default weapon
 	}
 
@@ -223,6 +225,7 @@ public class PlayerShooting : MonoBehaviour
 		EnableEffects();
 
 		Transform bulletTransform = transform;
+
 		if(bulletSpec.shootSpread != 0)
 		{
 			bulletTransform.Rotate(new Vector3(0,1,0) * Random.Range (0, bulletSpec.shootSpread) * bulletSpreadDirection);
@@ -230,12 +233,21 @@ public class PlayerShooting : MonoBehaviour
 		}
 
 		Rigidbody bullet = Instantiate (bulletPrefab, bulletTransform.position, bulletTransform.rotation * bulletPrefab.transform.rotation) as Rigidbody;
-		bullet.AddForce(bulletTransform.forward * bulletSpec.shootForce, ForceMode.Impulse);
-		Destroy (bullet.gameObject, bulletSpec.bulletLifeTime);
+		if(!bulletSpec.isProjectile)
+		{	
+			// Standard forward shooting bullet
+			bullet.AddForce(bulletTransform.forward * bulletSpec.shootForce, ForceMode.Impulse);
+			Destroy (bullet.gameObject, bulletSpec.bulletLifeTime);
+		}
+		else
+		{
+			// Lob type projectile
+			bullet.AddForce(playerRigidBody.velocity + bulletTransform.forward * bulletSpec.shootForce + new Vector3(0f, 1f, 0f) * bulletSpec.liftForce, ForceMode.Impulse);
+			bullet.AddTorque(new Vector3(1f, 0f, 0f) * bulletSpec.forwardTorque, ForceMode.Impulse);
+		}
 
 		currentAmmoTracker.ExpendAmmo();
 		ammoUI.UpdateAmmo(currentAmmoTracker);
-
 		Invoke ("DisableEffects", effectsDisplayTime);
 	}
 

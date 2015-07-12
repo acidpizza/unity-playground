@@ -146,6 +146,9 @@ MonoBehaviour:
   bulletCount: 30
   bulletName: Assault Rifle
   shootAudio: {fileID: 8300000, guid: 24a7baa182432bf45b353cc242af0858, type: 3}
+  isProjectile: 0
+  liftForce: 0
+  forwardTorque: 0
 --- !u!136 &13682924
 CapsuleCollider:
   m_ObjectHideFlags: 1

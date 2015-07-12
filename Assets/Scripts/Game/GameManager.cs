@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     
 	public Transform powerup_AssaultRifle;
 	public Transform powerup_PulseRifle;
+	public Transform powerup_GrenadeLauncher;
 	public Transform powerup_Health;
 
 	int count_zombunny;
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
 			count_zombear++;
 			if(count_zombear == 2)
 			{
-				//DropPowerUp(powerup_AssaultRifle, enemyPosition);
+				DropPowerUp(powerup_GrenadeLauncher, enemyPosition);
 			}
 			else if(count_zombear == 4)
 			{
