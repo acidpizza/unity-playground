@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
 	public float zoomSensitivity = 15.0f;
 	public float zoomSpeed = 5.0f;
 	public float zoomMin = 5.0f;
-	public float zoomMax = 40.0f;
+	public float zoomMax = 20.0f;
 	private float zoom;
 	Camera cam;
 

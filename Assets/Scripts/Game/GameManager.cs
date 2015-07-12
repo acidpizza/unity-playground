@@ -4,58 +4,75 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-	Text scoreText;
-    int score;
+	Text scoreText_;
+    int score_;
     
-	public Transform powerup_AssaultRifle;
-	public Transform powerup_PulseRifle;
-	public Transform powerup_GrenadeLauncher;
-	public Transform powerup_Health;
+	public Transform powerup_AssaultRifle_;
+	public Transform powerup_PulseRifle_;
+	public Transform powerup_GrenadeLauncher_;
+	public Transform powerup_Health_;
 
-	int count_zombunny;
-	int count_zombear;
+	public EnemySpawn zomBunnySpawner_;
+	public EnemySpawn zomBearSpawner_;
+	public EnemySpawn attackBotSpawner_;
 
+	int count_zombunny_ =0;
+	int count_zombear_ = 0;
 
     void Awake ()
     {
-		scoreText = GameObject.Find ("ScoreText").GetComponent<Text>();
-		score = 0;
-		AddScore (0, "", transform);
-
-		count_zombunny = 0;
-		count_zombear = 0;
+		scoreText_ = GameObject.Find ("ScoreText").GetComponent<Text>();
+		score_ = 0;
+		AddScore (0, "", transform); // Initialise score
     }
 
 	public void AddScore(int value, string enemyName, Transform enemyPosition)
 	{
-		score += value;
-		scoreText.text = "Score: " + score;
+		score_ += value;
+		scoreText_.text = "Score: " + score_;
 
+		// PowerUp drop algo
 		if(enemyName == "ZomBunny")
 		{
-			count_zombunny++;
-			if(count_zombunny == 4)
+			count_zombunny_++;
+			if(count_zombunny_ % 8  == 0)
 			{
-				DropPowerUp(powerup_AssaultRifle, enemyPosition);
+				DropPowerUp(powerup_PulseRifle_, enemyPosition);
 			}
-			else if(count_zombunny == 8)
+			else if(count_zombunny_ % 4 == 0)
 			{
-				count_zombunny = 0;
-				DropPowerUp(powerup_PulseRifle, enemyPosition);
+				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
 			}
 		}
 		else if(enemyName == "ZomBear")
 		{
-			count_zombear++;
-			if(count_zombear == 2)
+			count_zombear_++;
+			if(count_zombear_ % 4 == 0)
 			{
-				DropPowerUp(powerup_GrenadeLauncher, enemyPosition);
+				DropPowerUp(powerup_Health_, enemyPosition);
 			}
-			else if(count_zombear == 4)
+			else if(count_zombear_ % 2 == 0)
 			{
-				count_zombear = 0;
-				DropPowerUp(powerup_Health, enemyPosition);
+				DropPowerUp(powerup_GrenadeLauncher_, enemyPosition);
 			}
+		}
+
+		// Game state algo
+		if(count_zombunny_ == 0)
+		{
+			zomBunnySpawner_.spawnTime_ = 3.5f;
+			zomBearSpawner_.spawnTime_ = 999f;
+			attackBotSpawner_.spawnTime_ = 15f;
+		}
+		else if(count_zombunny_ == 20)
+		{
+			zomBearSpawner_.spawnTime_ = 17f;
+		}
+		else if(count_zombunny_ % 20 == 0)
+		{
+			zomBunnySpawner_.spawnTime_ *= 0.97f;
+			zomBearSpawner_.spawnTime_ *= 0.97f;
+			attackBotSpawner_.spawnTime_ *= 0.97f;
 		}
 	}
 

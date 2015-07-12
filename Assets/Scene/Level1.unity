@@ -2302,7 +2302,7 @@ MonoBehaviour:
   zoomSensitivity: 15
   zoomSpeed: 5
   zoomMin: 5
-  zoomMax: 40
+  zoomMax: 20
 --- !u!4 &370838994 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a4b268e7687a6de41832ec37bd64ea8c, type: 3}
@@ -5318,10 +5318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da825ca91cb02b4b8ace90f5025e4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 399515771}
-  enemy: {fileID: 168840, guid: 81622472bac3ebb42985629d059f097c, type: 2}
-  spawnTime: 3.5
-  spawnPoints:
+  playerHealth_: {fileID: 399515771}
+  enemy_: {fileID: 168840, guid: 81622472bac3ebb42985629d059f097c, type: 2}
+  spawnTime_: 3
+  spawnPoints_:
   - {fileID: 1523876570}
   - {fileID: 2027953072}
   - {fileID: 1425559786}
@@ -6284,10 +6284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da825ca91cb02b4b8ace90f5025e4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 399515771}
-  enemy: {fileID: 100000, guid: 7bca9c2cd581dbb4f971ad087c21f5f9, type: 2}
-  spawnTime: 17
-  spawnPoints:
+  playerHealth_: {fileID: 399515771}
+  enemy_: {fileID: 100000, guid: 7bca9c2cd581dbb4f971ad087c21f5f9, type: 2}
+  spawnTime_: 3
+  spawnPoints_:
   - {fileID: 1523876570}
   - {fileID: 2027953072}
   - {fileID: 1425559786}
@@ -7096,11 +7096,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa17ceda7e0ffa84386668f0066b5e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerup_AssaultRifle: {fileID: 433172, guid: e03a22edd02246647888fa70ac881eb4, type: 2}
-  powerup_PulseRifle: {fileID: 433172, guid: 3bbf42efb91fd1b4f97c9c0b80288156, type: 2}
-  powerup_GrenadeLauncher: {fileID: 433172, guid: 41489ee40a0f00740be76dbb02753005,
+  powerup_AssaultRifle_: {fileID: 433172, guid: e03a22edd02246647888fa70ac881eb4,
     type: 2}
-  powerup_Health: {fileID: 400000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
+  powerup_PulseRifle_: {fileID: 433172, guid: 3bbf42efb91fd1b4f97c9c0b80288156, type: 2}
+  powerup_GrenadeLauncher_: {fileID: 433172, guid: 41489ee40a0f00740be76dbb02753005,
+    type: 2}
+  powerup_Health_: {fileID: 400000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
+  zomBunnySpawner_: {fileID: 1085141356}
+  zomBearSpawner_: {fileID: 1376329670}
+  attackBotSpawner_: {fileID: 2046545359}
 --- !u!4 &1496171719
 Transform:
   m_ObjectHideFlags: 0
@@ -9539,10 +9543,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da825ca91cb02b4b8ace90f5025e4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 399515771}
-  enemy: {fileID: 181816, guid: 749b5d73661395446aa50b45dd0ba7a3, type: 2}
-  spawnTime: 14
-  spawnPoints:
+  playerHealth_: {fileID: 399515771}
+  enemy_: {fileID: 181816, guid: 749b5d73661395446aa50b45dd0ba7a3, type: 2}
+  spawnTime_: 3
+  spawnPoints_:
   - {fileID: 1523876570}
   - {fileID: 2027953072}
   - {fileID: 1425559786}

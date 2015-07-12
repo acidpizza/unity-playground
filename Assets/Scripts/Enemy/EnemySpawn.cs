@@ -2,27 +2,35 @@
 
 public class EnemySpawn : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
-    public GameObject enemy;
-    public float spawnTime = 3f;
-    public Transform[] spawnPoints;
+    public PlayerHealth playerHealth_;
+    public GameObject enemy_;
+    public float spawnTime_ = 3f;
+    public Transform[] spawnPoints_;
+
+	float timer = 0f;
 
 
-    void Start ()
-    {
-        InvokeRepeating ("Spawn", spawnTime, spawnTime);
-    }
+	void Update()
+	{
+		timer += Time.deltaTime;
+
+		if(timer >= spawnTime_)
+		{
+			Spawn ();
+			timer = 0;
+		}
+	}
 
 
     void Spawn ()
     {
-        if(playerHealth.IsDead ())
+        if(playerHealth_.IsDead ())
         {
             return;
         }
 
-        int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+        int spawnPointIndex = Random.Range (0, spawnPoints_.Length);
 
-        Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        Instantiate (enemy_, spawnPoints_[spawnPointIndex].position, spawnPoints_[spawnPointIndex].rotation);
     }
 }
