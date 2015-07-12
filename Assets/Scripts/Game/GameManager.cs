@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 	Text scoreText_;
     int score_;
     
+	public Transform pauseText_;
+
 	public Transform powerup_AssaultRifle_;
 	public Transform powerup_PulseRifle_;
 	public Transform powerup_GrenadeLauncher_;
@@ -19,12 +21,36 @@ public class GameManager : MonoBehaviour
 	int count_zombunny_ =0;
 	int count_zombear_ = 0;
 
+	bool pauseGame_ = false;
+
     void Awake ()
     {
 		scoreText_ = GameObject.Find ("ScoreText").GetComponent<Text>();
 		score_ = 0;
 		AddScore (0, "", transform); // Initialise score
     }
+
+	void Update()
+	{
+		if(Input.GetButtonDown ("Fire2"))
+		{
+			if(!pauseGame_)
+			{
+				Time.timeScale = 0f;
+				pauseGame_ = true;
+				pauseText_.gameObject.SetActive(true);
+				AudioListener.pause = true;
+			}
+			else
+			{
+				Time.timeScale = 1f;
+				pauseGame_ = false;
+				pauseText_.gameObject.SetActive(false);
+				AudioListener.pause = false;
+			}
+		}
+	}
+
 
 	public void AddScore(int value, string enemyName, Transform enemyPosition)
 	{
