@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
 		Normal, OneSlow, TwoSlow
 	};
 	Color normalColor = new Color(1, 1, 1, 1);
-	Color oneSlowColor = new Color(150f/255, 1, 150f/255, 1);
-	Color twoSlowColor = new Color(1, 150f/255, 150f/255, 1);
+	Color oneSlowColor = new Color(180f/255, 250f/255, 1, 1);
+	Color twoSlowColor = new Color(0f, 230f/255, 1, 1);
 	SlowState slowState = SlowState.Normal;
 
 	void Awake()

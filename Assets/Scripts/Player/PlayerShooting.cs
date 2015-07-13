@@ -61,6 +61,8 @@ public class PlayerShooting : MonoBehaviour
 		public BulletSpec bulletSpec;
 		public int bulletCount;
 		public bool unlimitedAmmo;
+		public float timer = 999f;
+		public int currentBurstCount = 0; // Track how many burst bullets have been shot so far
 	};
 
 	public AmmoUI ammoUI;
@@ -73,9 +75,7 @@ public class PlayerShooting : MonoBehaviour
 	AmmoTracker currentAmmoTracker;
 
 	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
-	int currentBurstCount = 0; // Track how many burst bullets have been shot so far
 
-	float timer;
 	AudioSource gunAudio;
 	Light gunLight;
 	ParticleSystem gunFlareParticles;
@@ -94,7 +94,7 @@ public class PlayerShooting : MonoBehaviour
 
 	void Update ()
 	{
-		timer += Time.deltaTime;
+		currentAmmoTracker.timer += Time.deltaTime;
 
 		if(Input.GetButtonDown ("ChangeWeaponRight"))
 		{
@@ -109,29 +109,24 @@ public class PlayerShooting : MonoBehaviour
 		{
 			if(currentAmmoTracker.AmmoAvailable())
 			{
-				if(bulletSpec.burstRounds != 0)
+				if(bulletSpec.burstRounds != 0) // Burst mode
 				{
-					// Burst mode
-					if(timer >= bulletSpec.timeBetweenBulletInBurst && currentBurstCount < bulletSpec.burstRounds)
+					if(currentAmmoTracker.timer >= bulletSpec.timeBetweenBurst)
+					{
+						// Reset burst limit if exceed reload time
+						currentAmmoTracker.currentBurstCount = 0;
+					}
+
+					if(currentAmmoTracker.timer >= bulletSpec.timeBetweenBulletInBurst && currentAmmoTracker.currentBurstCount < bulletSpec.burstRounds)
 					{
 						// In the midst of a burst
-						currentBurstCount++;
+						currentAmmoTracker.currentBurstCount++;
 						Shoot ();
 					}
-					else if(currentBurstCount >= bulletSpec.burstRounds)
-					{
-						// Hit burst limit -> need to wait for new burst
-						if(timer >= bulletSpec.timeBetweenBurst)
-						{
-							currentBurstCount = 1;
-							Shoot ();
-						}
-					}
 				}
-				else
+				else // Single shot mode
 				{
-					// Single shot mode
-					if(timer >= bulletSpec.timeBetweenBurst)
+					if(currentAmmoTracker.timer >= bulletSpec.timeBetweenBurst)
 					{
 						Shoot ();
 					}
@@ -140,11 +135,11 @@ public class PlayerShooting : MonoBehaviour
 			else
 			{
 				// No Ammo
-				if(timer >= timeBetweenEmptyShots)
+				if(currentAmmoTracker.timer >= timeBetweenEmptyShots)
 				{
 					gunAudio.clip = noAmmoAudio;
 					gunAudio.Play();
-					timer = 0f;
+					currentAmmoTracker.timer = 0f;
 				}
 			}
 		}
@@ -221,7 +216,7 @@ public class PlayerShooting : MonoBehaviour
 
 	void Shoot ()
 	{
-		timer = 0f;
+		currentAmmoTracker.timer = 0f;
 		EnableEffects();
 
 		Transform bulletTransform = transform;

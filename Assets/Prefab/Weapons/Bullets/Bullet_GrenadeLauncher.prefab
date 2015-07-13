@@ -369,7 +369,7 @@ MonoBehaviour:
   bulletLifeTime: 1.5
   shootForce: 3
   shootSpread: 0
-  bulletCount: 25
+  bulletCount: 20
   bulletName: Grenade Launcher
   shootAudio: {fileID: 8300000, guid: 465885bc75a10194fb6cb5f321eb005e, type: 3}
   isProjectile: 1
@@ -418,7 +418,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: bulletCount
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: shootAudio

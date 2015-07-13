@@ -63,11 +63,11 @@ public class GameManager : MonoBehaviour
 			count_zombunny_++;
 			if(count_zombunny_ % 8  == 0)
 			{
-				DropPowerUp(powerup_PulseRifle_, enemyPosition);
+				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
 			}
 			else if(count_zombunny_ % 4 == 0)
 			{
-				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
+				DropPowerUp(powerup_PulseRifle_, enemyPosition);
 			}
 		}
 		else if(enemyName == "ZomBear")

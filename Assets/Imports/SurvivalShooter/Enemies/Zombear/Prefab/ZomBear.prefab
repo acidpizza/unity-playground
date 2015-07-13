@@ -797,13 +797,13 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 11993032
+          rgba: 16777142
         key1:
           serializedVersion: 2
-          rgba: 4282774112
+          rgba: 4294082373
         key2:
           serializedVersion: 2
-          rgba: 4278225174
+          rgba: 4287171584
         key3:
           serializedVersion: 2
           rgba: 0
@@ -1609,7 +1609,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4290117572
+        rgba: 4294966453
       minMaxState: 0
     startSize:
       scalar: 1.20000005
@@ -1808,13 +1808,13 @@ ParticleSystem:
           rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4283695001
+          rgba: 4294961747
         key2:
           serializedVersion: 2
-          rgba: 3407716
+          rgba: 16751155
         key3:
           serializedVersion: 2
-          rgba: 1033275
+          rgba: 12848917
         key4:
           serializedVersion: 2
           rgba: 1003972
@@ -2808,13 +2808,13 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 11993026
+          rgba: 16777142
         key1:
           serializedVersion: 2
-          rgba: 4282774105
+          rgba: 4294088005
         key2:
           serializedVersion: 2
-          rgba: 4278225168
+          rgba: 4287177472
         key3:
           serializedVersion: 2
           rgba: 0
@@ -3806,13 +3806,13 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 11993050
+          rgba: 16383926
         key1:
           serializedVersion: 2
-          rgba: 4283298373
+          rgba: 4294080581
         key2:
           serializedVersion: 2
-          rgba: 4280125696
+          rgba: 4287168539
         key3:
           serializedVersion: 2
           rgba: 0
