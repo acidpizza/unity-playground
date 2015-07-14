@@ -367,7 +367,7 @@ MonoBehaviour:
   timeBetweenBulletInBurst: 0
   damagePerShot: 0
   bulletLifeTime: 1.5
-  shootForce: 3
+  shootForce: 4
   shootSpread: 0
   bulletCount: 20
   bulletName: Grenade Launcher
@@ -410,7 +410,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: shootForce
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: timeBetweenBurst

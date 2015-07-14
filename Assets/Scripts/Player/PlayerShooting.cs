@@ -237,7 +237,7 @@ public class PlayerShooting : MonoBehaviour
 		else
 		{
 			// Lob type projectile
-			bullet.velocity = playerRigidBody.velocity;
+			bullet.velocity = playerRigidBody.velocity * 0.6f;
 			bullet.AddForce(bulletTransform.forward * bulletSpec.shootForce + new Vector3(0f, 1f, 0f) * bulletSpec.liftForce, ForceMode.Impulse);
 			bullet.AddTorque(new Vector3(1f, 0f, 0f) * bulletSpec.forwardTorque, ForceMode.Impulse);
 		}
