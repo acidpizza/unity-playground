@@ -21,6 +21,7 @@ public class BulletSpec : MonoBehaviour
 	public float liftForce = 0f;
 	public float forwardTorque = 0f;
 
+
 	protected virtual void OnCollisionEnter(Collision other) 
 	{
 		ParticleSystem hitParticles = Instantiate (hitParticlesPrefab, other.contacts [0].point, hitParticlesPrefab.transform.rotation) as ParticleSystem;
@@ -47,6 +48,7 @@ public class BulletSpec : MonoBehaviour
 				enemyHealth.TakeDamage (damagePerShot);
 			}
 
+			BulletTracker.AmmoHit(this);
         }
 
 

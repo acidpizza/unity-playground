@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameConfig
+public class GameConfig : MonoBehaviour
 {
 	public enum Difficulty
 	{
@@ -10,4 +10,8 @@ public class GameConfig
 
 	public static Difficulty difficulty = Difficulty.Normal;
 
+	void Awake()
+	{
+		BulletTracker.Clear ();
+	}
 }

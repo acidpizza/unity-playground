@@ -9,8 +9,7 @@ public class GrenadeExplode : MonoBehaviour
 
 	ParticleSystem explosionParticles;
 	AudioSource explosionAudio;
-
-
+	
 	void Awake()
 	{
 		explosionParticles = GetComponent<ParticleSystem> ();
@@ -31,6 +30,7 @@ public class GrenadeExplode : MonoBehaviour
 			if(enemyHealth != null && !hitColliders[i].isTrigger)
 			{
 				enemyHealth.TakeDamage(explosionDamage);
+				BulletTracker.AmmoHit("Grenade Launcher");
 			}
 			i++;
 		}

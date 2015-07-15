@@ -49,7 +49,7 @@ public class EnemyMagicCast : MonoBehaviour {
 			if(distanceToPlayer < explosionRadius)
 			{
 				isExplosionDamageDealt = true;
-				playerHealth.TakeDamage(explosionDamage);
+				playerHealth.TakeDamage("Mage Lightning", explosionDamage);
 			}
 		}
 	}

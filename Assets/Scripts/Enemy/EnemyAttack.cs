@@ -64,7 +64,7 @@ public class EnemyAttack : MonoBehaviour
 
         if(!playerHealth.IsDead ())
         {
-            playerHealth.TakeDamage (attackDamage);
+            playerHealth.TakeDamage (enemyHealth.enemyName, attackDamage);
         }
     }
 }

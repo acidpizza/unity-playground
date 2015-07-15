@@ -12,10 +12,9 @@ public class GameOverManager : MonoBehaviour
 	public void GameOver()
 	{
 		anim.SetTrigger ("GameOver");
-		Invoke ("RestartApplication", 4f);
 	}
 
-	void RestartApplication()
+	public void RestartApplication()
 	{
 		Application.LoadLevel ("StartMenu");
 	}

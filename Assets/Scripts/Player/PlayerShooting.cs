@@ -68,6 +68,7 @@ public class PlayerShooting : MonoBehaviour
 	public AmmoUI ammoUI;
 	public Rigidbody bulletPrefab;
 	public AudioClip noAmmoAudio;
+
 	BulletSpec bulletSpec;
 
 	List<AmmoTracker> ammoStore = new List<AmmoTracker> ();
@@ -147,6 +148,8 @@ public class PlayerShooting : MonoBehaviour
 
 	public void CollectWeapon(Rigidbody newBulletPrefab)
 	{
+		BulletTracker.CollectAmmo(newBulletPrefab.GetComponent<BulletSpec> ());
+
 		// Find through currently obtained weapons to add the ammo 
 		for(int i = 0; i < ammoStore.Count; i++)
 		{
@@ -245,6 +248,8 @@ public class PlayerShooting : MonoBehaviour
 		currentAmmoTracker.ExpendAmmo();
 		ammoUI.UpdateAmmo(currentAmmoTracker);
 		Invoke ("DisableEffects", effectsDisplayTime);
+
+		BulletTracker.AmmoShot (bulletSpec);
 	}
 
 	void EnableEffects()

@@ -26,7 +26,7 @@ public class EnemyBulletSpec : MonoBehaviour
 		PlayerHealth playerHealth = other.collider.GetComponent <PlayerHealth> ();
         if(playerHealth != null)
         {
-            playerHealth.TakeDamage (damagePerShot);
+            playerHealth.TakeDamage (bulletName, damagePerShot);
         }
 
 
