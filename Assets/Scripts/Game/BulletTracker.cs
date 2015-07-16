@@ -141,22 +141,17 @@ public class BulletTracker : MonoBehaviour
 #region EnemyDamageStats
 	public static void EnemyDamage(string enemyName, int damage)
 	{
-		//Debug.Log ("Enemy damage: " + enemyName + " = " + damage);
-
-		//lock(enemyDamageStatsList_lock)
-		//{
-			foreach( EnemyDamageStats enemyDamageStats in enemyDamageStatsList)
+		foreach( EnemyDamageStats enemyDamageStats in enemyDamageStatsList)
+		{
+			if(enemyDamageStats.enemyName.Equals(enemyName))
 			{
-				if(enemyDamageStats.enemyName.Equals(enemyName))
-				{
-					enemyDamageStats.damageCount += damage;
-					return; // enemyDamageStats found
-				}
+				enemyDamageStats.damageCount += damage;
+				return; // enemyDamageStats found
 			}
-			
-			// New enemy type killed
-			enemyDamageStatsList.Add(new EnemyDamageStats(enemyName, damage));
-		//}
+		}
+		
+		// New enemy type killed
+		enemyDamageStatsList.Add(new EnemyDamageStats(enemyName, damage));
 	}
 #endregion
 
@@ -164,6 +159,4 @@ public class BulletTracker : MonoBehaviour
 	public static List<EnemyKillStats> enemyKillStatsList = new List<EnemyKillStats> ();
 
 	public static List<EnemyDamageStats> enemyDamageStatsList = new List<EnemyDamageStats> ();
-	private static readonly object enemyDamageStatsList_lock = new object();
-
 };

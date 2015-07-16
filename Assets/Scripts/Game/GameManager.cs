@@ -143,7 +143,11 @@ public class GameManager : MonoBehaviour
 		statsText_.text += "|     Weapon     | Collected |  Shot  |  Hit  | % Used | % Accuracy |\n";
 		foreach( BulletTracker.BulletStats bulletStat in BulletTracker.bulletStatsList)
 		{
-			statsText_.text += string.Format("|{0,-16}|{1,-11}|{2,-8}|{3,-7}|{4,-8:N2}|{5,-12:N2}|\n", bulletStat.bulletName,bulletStat.ammoCollected,bulletStat.ammoShot,bulletStat.ammoHit, 100.0f * bulletStat.ammoShot / bulletStat.ammoCollected, 100.0f * bulletStat.ammoHit / bulletStat.ammoShot);
+			string used = bulletStat.ammoCollected == 0 ? "NA" : (100.0f * bulletStat.ammoShot / bulletStat.ammoCollected).ToString("0.00");
+			string accuracy = bulletStat.ammoShot == 0 ? "NA" : (100.0f * bulletStat.ammoHit / bulletStat.ammoShot).ToString("0.00");
+			statsText_.text += string.Format("|{0,-16}|{1,-11}|{2,-8}|{3,-7}|{4,-8:N2}|{5,-12:N2}|\n", 
+			                                 bulletStat.bulletName,bulletStat.ammoCollected,bulletStat.ammoShot,bulletStat.ammoHit, 
+			                                 used, accuracy);
 		}
 
 		statsText_.text += "\n";
