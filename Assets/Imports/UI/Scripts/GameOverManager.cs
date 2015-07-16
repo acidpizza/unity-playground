@@ -12,6 +12,7 @@ public class GameOverManager : MonoBehaviour
 	public void GameOver()
 	{
 		anim.SetTrigger ("GameOver");
+		Cursor.visible = true;
 	}
 
 	public void RestartApplication()
