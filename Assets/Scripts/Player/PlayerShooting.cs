@@ -71,8 +71,8 @@ public class PlayerShooting : MonoBehaviour
 
 	BulletSpec bulletSpec;
 
-	List<AmmoTracker> ammoStore = new List<AmmoTracker> ();
-	int ammoStoreIndex = 0;
+	List<AmmoTracker> ammoTrackerList = new List<AmmoTracker> ();
+	int ammoTrackerListIndex = 0;
 	AmmoTracker currentAmmoTracker;
 
 	int bulletSpreadDirection = 1; // this will toggle between 1 and -1 for rotation direction
@@ -151,12 +151,12 @@ public class PlayerShooting : MonoBehaviour
 		BulletTracker.CollectAmmo(newBulletPrefab.GetComponent<BulletSpec> ());
 
 		// Find through currently obtained weapons to add the ammo 
-		for(int i = 0; i < ammoStore.Count; i++)
+		for(int i = 0; i < ammoTrackerList.Count; i++)
 		{
-			AmmoTracker ammoTracker = ammoStore[i];
+			AmmoTracker ammoTracker = ammoTrackerList[i];
 			if(ammoTracker.AddAmmo(newBulletPrefab)) // We have this weapon already. Add ammo. 
 			{
-				if(ammoStoreIndex == i) // Only update UI if currently showing this gun
+				if(ammoTrackerListIndex == i) // Only update UI if currently showing this gun
 				{
 					ammoUI.UpdateAmmo(ammoTracker); 
 					gunAudio.clip = bulletSpec.shootAudio; // Restore shooting sound (in case ammo was empty)
@@ -167,11 +167,11 @@ public class PlayerShooting : MonoBehaviour
 
 		{
 			// Cannot find -> this is a new weapon, add new AmmoTracker
-			ammoStore.Add(new AmmoTracker(newBulletPrefab));
-			AmmoTracker ammoTracker = ammoStore[ammoStore.Count - 1];
+			ammoTrackerList.Add(new AmmoTracker(newBulletPrefab));
+			AmmoTracker ammoTracker = ammoTrackerList[ammoTrackerList.Count - 1];
 
 			// Update currentAmmoTracker and UI if this is the 1st weapon collected
-			if(ammoStoreIndex == ammoStore.Count - 1)
+			if(ammoTrackerListIndex == ammoTrackerList.Count - 1)
 			{
 				EquipWeapon(ammoTracker);
 			}
@@ -183,21 +183,21 @@ public class PlayerShooting : MonoBehaviour
 	{
 		if (changeWeapon_input) 
 		{
-			ammoStoreIndex = (ammoStoreIndex + 1) % ammoStore.Count;
+			ammoTrackerListIndex = (ammoTrackerListIndex + 1) % ammoTrackerList.Count;
 		}
 		else
 		{
-			if(ammoStoreIndex == 0)
+			if(ammoTrackerListIndex == 0)
 			{
-				ammoStoreIndex = ammoStore.Count - 1;
+				ammoTrackerListIndex = ammoTrackerList.Count - 1;
 			}
 			else
 			{
-				ammoStoreIndex--;
+				ammoTrackerListIndex--;
 			}
 		}
 
-		EquipWeapon (ammoStore [ammoStoreIndex]);
+		EquipWeapon (ammoTrackerList [ammoTrackerListIndex]);
 	}
 
 	void EquipWeapon(AmmoTracker ammoTracker)

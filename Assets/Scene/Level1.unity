@@ -2383,7 +2383,7 @@ MonoBehaviour:
   zoomSensitivity: 15
   zoomSpeed: 5
   zoomMin: 5
-  zoomMax: 20
+  zoomMax: 25
 --- !u!4 &370838994 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a4b268e7687a6de41832ec37bd64ea8c, type: 3}
@@ -2469,7 +2469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Stats:'
+  m_Text: Loading stats...
 --- !u!222 &396757181
 CanvasRenderer:
   m_ObjectHideFlags: 0
