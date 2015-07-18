@@ -34,17 +34,20 @@ public class PlayerHealth : MonoBehaviour
 
 	public void TakeDamage (string enemyName, int value)
     {
-        currentHealth -= value;
-		healthUI.TakeDamage (value);
+		if(!isDead)
+		{
+	        currentHealth -= value;
+			healthUI.TakeDamage (value);
 
-        playerAudio.Play ();
+	        playerAudio.Play ();
 
-        if(currentHealth <= 0 && !isDead)
-        {
-            Death ();
-        }
+	        if(currentHealth <= 0 && !isDead)
+	        {
+	            Death ();
+	        }
 
-		BulletTracker.EnemyDamage (enemyName, value);
+			BulletTracker.EnemyDamage (enemyName, value);
+		}
     }
 
 	public void GainHealth(int value)

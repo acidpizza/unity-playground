@@ -4534,7 +4534,7 @@ Transform:
   - {fileID: 58740365}
   - {fileID: 30033048}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1001 &887518033
 Prefab:
   m_ObjectHideFlags: 0
@@ -7541,7 +7541,7 @@ Transform:
   m_Children:
   - {fileID: 271973147}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!114 &1496171720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10287,7 +10287,7 @@ RectTransform:
   - {fileID: 1464713771}
   - {fileID: 1184842863}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
