@@ -29,7 +29,7 @@ public class EnemyMovement_Shooter : MonoBehaviour
         nav = GetComponent <NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
 
-		shootableByEnemyMask = LayerMask.GetMask ("ShootableByEnemy");
+		shootableByEnemyMask = ~LayerMask.GetMask ("Enemy"); // Aim to layers other than enemy
 //		gunLine = GetComponent<LineRenderer> ();
     }
 
