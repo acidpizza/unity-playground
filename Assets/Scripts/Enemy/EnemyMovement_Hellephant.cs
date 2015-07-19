@@ -11,12 +11,9 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	Animator anim;
 
 	bool playerInRange = false;
-	bool charging = false;
 	bool chargeFinalBurst = false;
 	float chargeTimer = 999f;
 
-	public float rotateSpeed = 10f;
-	public float chargeTime = 1f;
 	public float chargeReloadTime = 5f;
 
 	// Line Of Sight detection
@@ -31,14 +28,16 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	public SkinnedMeshRenderer hellephantRenderer;
 	public Material hellephantNormalMaterial;
 	public Material hellephantTransparentMaterial;
+	public ParticleSystem flameEnchant;
+	public ParticleSystem dustCloud;
+	Quaternion dustCloudRotation; 
 
-	enum EtheralState
+	enum ActionState
 	{
-		Normal, Etheral
+		Chasing, ChargePreparation, Charging
 	};
-	Color normalColor = new Color(1, 1, 1, 1);
-	Color etheralColor = new Color(1, 1, 1, 0.2f);
-	
+	ActionState actionState = ActionState.Chasing;
+
     void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player").transform;
@@ -49,10 +48,10 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		anim = GetComponent <Animator> ();
 
 		enemyLayer = LayerMask.NameToLayer("Enemy");
-		shootableByEnemyMask = ~enemyLayer;
+		shootableByEnemyMask = ~LayerMask.GetMask ("Enemy");
 		hellephantEtheralLayer = LayerMask.NameToLayer("HellephantEtheral");
+		dustCloudRotation = dustCloud.transform.rotation;
     }
-
 
     void Update ()
     {
@@ -60,25 +59,32 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 
         if(!enemyHealth.IsDead () && !playerHealth.IsDead ())
         {
-			if(charging)
+			if(actionState == ActionState.Chasing)
+			{
+				ChasePlayer();
+			}
+			else if(actionState == ActionState.Charging)
 			{
 				ChargeToPlayer();
 			}
-			else
+			else if(actionState == ActionState.ChargePreparation)
 			{
-				ChasePlayer();
+				// Do nothing
 			}
         }
         else
         {
 			// Enemy or Player dead
             nav.enabled = false;
+			dustCloud.Stop ();
 
 			if(playerHealth.IsDead())
 			{
 				anim.SetTrigger("PlayerDead");
 			}
         }
+
+		dustCloud.transform.rotation = dustCloudRotation;
     }
 
 	void ChasePlayer()
@@ -91,7 +97,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 			if(HasLineOfSightToPlayer() && chargeTimer > chargeReloadTime)
 			{
 				// Charge to the player
-				StartCharge();
+				PrepareToCharge();
 			}
 			else
 			{
@@ -109,22 +115,32 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		}
 	}
 
+	void PrepareToCharge()
+	{
+		actionState = ActionState.ChargePreparation;
+		flameEnchant.Stop ();
+		flameEnchant.Play ();
+		Invoke ("StartCharge", 1.5f);
+	}
+
 	void StartCharge()
 	{
-		chargeTimer = 0f;
-		charging = true;
-		nav.speed = 15;
+		actionState = ActionState.Charging;
+		nav.speed = 13;
 		chargeFinalBurst = false;
+		dustCloud.Play ();
 		TurnEtheral ();
 	}
 
 	void EndCharge()
 	{
-		charging = false;
+		actionState = ActionState.Chasing;
 		nav.speed = 2;
 		chargeFinalBurst = false;
+		chargeTimer = 0f;
 		TurnNormal ();
-		Stomp ();
+		dustCloud.Stop ();
+		StartStomp ();
 	}
 
 	void ChargeToPlayer()
@@ -150,14 +166,14 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		}
 	}
 
-	void Stomp()
+	void StartStomp()
 	{
 		anim.SetTrigger ("Stomp");
 		nav.enabled = false;
-		Invoke ("EnableNav", 0.8f);
+		Invoke ("EndStomp", 0.8f);
 	}
 
-	void EnableNav()
+	void EndStomp()
 	{
 		if(!enemyHealth.IsDead () && !playerHealth.IsDead ())
 		{
