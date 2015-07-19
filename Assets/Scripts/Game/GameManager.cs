@@ -160,10 +160,10 @@ public class GameManager : MonoBehaviour
 
 		statsText_.text += "\n";
 		
-		statsText_.text += "| Enemy Attack  | Damage |\n";
+		statsText_.text += "|  Enemy Attack  | Damage |\n";
 		foreach( BulletTracker.EnemyDamageStats enemyDamageStats in BulletTracker.enemyDamageStatsList)
 		{
-			statsText_.text += string.Format ("|{0,-15}|{1,-8}|\n", enemyDamageStats.enemyName, enemyDamageStats.damageCount);
+			statsText_.text += string.Format ("|{0,-16}|{1,-8}|\n", enemyDamageStats.enemyName, enemyDamageStats.damageCount);
 		}
 	}
 }

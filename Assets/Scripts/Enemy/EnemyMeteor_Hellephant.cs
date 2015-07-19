@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyStomp_Hellephant : MonoBehaviour 
+public class EnemyMeteor_Hellephant : MonoBehaviour 
 {	
 	Transform player;
 	Rigidbody playerRigidBody;

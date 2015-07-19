@@ -15,6 +15,8 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	float chargeTimer = 999f;
 
 	public float chargeReloadTime = 5f;
+	public float stompRadius = 3f;
+	public int stompDamage = 15;
 
 	// Line Of Sight detection
 	int shootableByEnemyMask;
@@ -30,7 +32,14 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	public Material hellephantTransparentMaterial;
 	public ParticleSystem flameEnchant;
 	public ParticleSystem dustCloud;
+	public ParticleSystem stompBlast;
 	Quaternion dustCloudRotation; 
+
+	FadingAudioSource enemyAttackAudioSource;
+	//AudioSource enemyAttackAudioSource;
+	public AudioClip elephantAttackAudio;
+	public AudioClip stampedeAudio;
+	public AudioClip elephantStompAudio;
 
 	enum ActionState
 	{
@@ -51,8 +60,11 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		shootableByEnemyMask = ~LayerMask.GetMask ("Enemy");
 		hellephantEtheralLayer = LayerMask.NameToLayer("HellephantEtheral");
 		dustCloudRotation = dustCloud.transform.rotation;
-    }
 
+		//enemyAttackAudioSource = GetComponents<AudioSource> () [1];
+		enemyAttackAudioSource = GetComponent<FadingAudioSource> ();
+	}
+	
     void Update ()
     {
 		chargeTimer += Time.deltaTime;
@@ -84,7 +96,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 			}
         }
 
-		dustCloud.transform.rotation = dustCloudRotation;
+		dustCloud.transform.rotation = dustCloudRotation; // Retain rotation (don't rotate with parent)
     }
 
 	void ChasePlayer()
@@ -120,15 +132,22 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		actionState = ActionState.ChargePreparation;
 		flameEnchant.Stop ();
 		flameEnchant.Play ();
+
+		enemyAttackAudioSource.clip = elephantAttackAudio;
+		enemyAttackAudioSource.loop = false;
+		enemyAttackAudioSource.Play ();
 		Invoke ("StartCharge", 1.5f);
 	}
 
 	void StartCharge()
 	{
 		actionState = ActionState.Charging;
-		nav.speed = 13;
+		nav.speed = 16;
 		chargeFinalBurst = false;
 		dustCloud.Play ();
+		enemyAttackAudioSource.clip = stampedeAudio;
+		enemyAttackAudioSource.loop = true;
+		enemyAttackAudioSource.Play ();
 		TurnEtheral ();
 	}
 
@@ -140,6 +159,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		chargeTimer = 0f;
 		TurnNormal ();
 		dustCloud.Stop ();
+		enemyAttackAudioSource.FadeOut ();
 		StartStomp ();
 	}
 
@@ -148,7 +168,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		if(!chargeFinalBurst)
 		{
 			// Initial phase of charge -> keep following player
-			if(nav.remainingDistance > 4.0f)
+			if(nav.remainingDistance > 3.0f)
 			{
 				nav.SetDestination (player.position);
 			}
@@ -170,7 +190,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	{
 		anim.SetTrigger ("Stomp");
 		nav.enabled = false;
-		Invoke ("EndStomp", 0.8f);
+		Invoke ("EndStomp", 0.6f);
 	}
 
 	void EndStomp()
@@ -178,6 +198,17 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		if(!enemyHealth.IsDead () && !playerHealth.IsDead ())
 		{
 			nav.enabled = true;
+
+			stompBlast.Stop();
+			stompBlast.Play();
+			enemyAttackAudioSource.clip = elephantStompAudio;
+			enemyAttackAudioSource.loop = false;
+			enemyAttackAudioSource.Play ();
+			float distanceToPlayer = (transform.position - player.position).magnitude;
+			if(distanceToPlayer < stompRadius)
+			{
+				playerHealth.TakeDamage("Hellephant Stomp", stompDamage);
+			}
 		}
 	}
 
