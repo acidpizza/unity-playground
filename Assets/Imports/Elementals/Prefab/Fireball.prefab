@@ -78,7 +78,8 @@ GameObject:
   - 4: {fileID: 400010}
   - 198: {fileID: 19800010}
   - 199: {fileID: 19900010}
-  m_Layer: 0
+  - 114: {fileID: 11477904}
+  m_Layer: 14
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,8 +174,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalRotation: {x: .353553414, y: -.353553414, z: .14644663, w: .853553355}
+  m_LocalPosition: {x: 8.93999958, y: 15, z: -8.56000042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -209,6 +210,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400010}
   m_RootOrder: 3
+--- !u!114 &11477904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9f7c081f7bf364b8671010cdb90c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePrefab: {fileID: 400006, guid: 05490f50158ba48a08e9c9e13a996938, type: 2}
+  strikeRadius: 1.20000005
+  damage: 15
 --- !u!198 &19800002
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3056,7 +3071,7 @@ ParticleSystem:
       minMaxState: 1
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     type: 1
     plane0: {fileID: 0}
     plane1: {fileID: 0}
@@ -4298,7 +4313,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    gravityModifier: 0
+    gravityModifier: .25
     inheritVelocity: 0
     maxNumParticles: 1000
   ShapeModule:
@@ -5040,7 +5055,7 @@ ParticleSystem:
       m_Bits: 4294967295
     quality: 0
     voxelSize: .5
-    collisionMessages: 0
+    collisionMessages: 1
   SubModule:
     enabled: 1
     subEmitterBirth: {fileID: 19800002}
