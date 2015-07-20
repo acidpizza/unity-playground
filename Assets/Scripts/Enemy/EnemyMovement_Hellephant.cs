@@ -168,7 +168,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		if(!chargeFinalBurst)
 		{
 			// Initial phase of charge -> keep following player
-			if(nav.remainingDistance > 3.0f)
+			if(nav.remainingDistance > 1.6f)
 			{
 				nav.SetDestination (player.position);
 			}
@@ -176,7 +176,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 			{
 				// Near to the player -> predict movement and charge there
 				chargeFinalBurst = true;
-				Vector3 anticpatedLocation = player.position + playerRigidBody.velocity * 0.75f;
+				Vector3 anticpatedLocation = player.position + playerRigidBody.velocity * 0.85f;
 				nav.SetDestination (anticpatedLocation);
 			}
 		}
