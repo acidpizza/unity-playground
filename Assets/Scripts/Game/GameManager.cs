@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 	public EnemySpawn zomBunnySpawner_;
 	public EnemySpawn zomBearSpawner_;
 	public EnemySpawn attackBotSpawner_;
+	public EnemySpawn meteorSpawner_;
 	
 	int count_zombunny_kills_ = 0;
 	int count_zombear_kills_ = 0;
@@ -115,11 +116,17 @@ public class GameManager : MonoBehaviour
 		{
 			zomBunnySpawner_.spawnTime_ = 3.5f;
 			zomBearSpawner_.spawnTime_ = 999f;
+			attackBotSpawner_.spawnTime_ = 999f;
+		}
+		else if(count_zombunny_kills_ == 4)
+		{
 			attackBotSpawner_.spawnTime_ = 15f;
+			attackBotSpawner_.gameObject.SetActive(true);
 		}
 		else if(count_zombunny_kills_ == 20)
 		{
 			zomBearSpawner_.spawnTime_ = 17f;
+			zomBearSpawner_.gameObject.SetActive(true);
 		}
 		else if(count_zombunny_kills_ % 20 == 0)
 		{

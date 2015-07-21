@@ -4,6 +4,7 @@ using System.Collections;
 public class MeteorStrike : MonoBehaviour {
 
 	public Transform firePrefab;
+	public Transform zomBunnyPrefab;
 	public float strikeRadius = 1.2f;
 	public int damage = 15;
 
@@ -20,6 +21,8 @@ public class MeteorStrike : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerHealth = player.GetComponent <PlayerHealth> ();
+
+
 	}
 
 	// Update is called once per frame
@@ -34,6 +37,7 @@ public class MeteorStrike : MonoBehaviour {
 		if(numCollisionEvents > 0)
 		{
 			Instantiate(firePrefab.gameObject, collisionEvents[0].intersection, firePrefab.rotation);
+			Instantiate(zomBunnyPrefab.gameObject, collisionEvents[0].intersection, zomBunnyPrefab.rotation);
 
 			float distanceToPlayer = (collisionEvents[0].intersection - player.position).magnitude;
 			if(distanceToPlayer < strikeRadius)

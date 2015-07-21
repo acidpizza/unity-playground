@@ -175,7 +175,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: .353553414, y: -.353553414, z: .14644663, w: .853553355}
-  m_LocalPosition: {x: 8.93999958, y: 15, z: -8.56000042}
+  m_LocalPosition: {x: 17, y: 15, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -222,8 +222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 400006, guid: 05490f50158ba48a08e9c9e13a996938, type: 2}
+  zomBunnyPrefab: {fileID: 432352, guid: 81622472bac3ebb42985629d059f097c, type: 2}
   strikeRadius: 1.20000005
-  damage: 15
+  damage: 10
 --- !u!198 &19800002
 ParticleSystem:
   m_ObjectHideFlags: 1
