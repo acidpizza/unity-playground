@@ -93,6 +93,8 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 			if(playerHealth.IsDead())
 			{
 				anim.SetTrigger("PlayerDead");
+				TurnNormal();
+				enemyAttackAudioSource.FadeOut();
 			}
         }
 

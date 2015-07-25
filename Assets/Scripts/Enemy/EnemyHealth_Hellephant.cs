@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth_Hellephant : EnemyHealth
 {
 	EnemyMovement_Hellephant hellephantMovement;
+	bool secondForm = false;
 
 	protected override void Awake ()
 	{
@@ -28,7 +29,7 @@ public class EnemyHealth_Hellephant : EnemyHealth
 	        {
 	            Death ();
 	        }
-			else if(currentHealth <= 4f/10f * startingHealth)
+			else if(!secondForm && currentHealth <= 4f/10f * startingHealth)
 			{
 				TakeSecondForm();
 			}
@@ -39,6 +40,11 @@ public class EnemyHealth_Hellephant : EnemyHealth
 	{
 		hellephantMovement.TakeSecondForm ();
 		gameManager.ActivateBossSecondForm ();
+		secondForm = true;
+	}
 
+	public bool IsSecondForm()
+	{
+		return secondForm;
 	}
 }

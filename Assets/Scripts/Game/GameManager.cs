@@ -31,12 +31,15 @@ public class GameManager : MonoBehaviour
 	int count_attackBot_kills_ = 0;
 
 	bool pauseGame_ = false;
-	
+	AudioSource audioSource;
+
 	Transform player_;
 	PlayerHealth playerHealth_;
 	
 	void Awake ()
     {
+		audioSource = GetComponent<AudioSource> ();
+
 		scoreText_ = GameObject.Find ("ScoreText").GetComponent<Text>();
 		score_ = 0;
 		AddScore(0, "", transform); // Initialise score and game state
@@ -204,5 +207,7 @@ zomBearSpawner_.spawnTime_ = 17f;
 		attackBotSpawner_.spawnTime_ = 28f;
 
 		meteorSpawner_.gameObject.SetActive(true);
+
+		audioSource.Play ();
 	}
 }

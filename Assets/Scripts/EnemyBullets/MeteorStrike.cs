@@ -36,7 +36,10 @@ public class MeteorStrike : MonoBehaviour {
 
 		if(numCollisionEvents > 0)
 		{
-			Instantiate(firePrefab.gameObject, collisionEvents[0].intersection, firePrefab.rotation);
+			if(firePrefab!=null)
+			{
+				Instantiate(firePrefab.gameObject, collisionEvents[0].intersection, firePrefab.rotation);
+			}
 			Instantiate(zomBunnyPrefab.gameObject, collisionEvents[0].intersection, zomBunnyPrefab.rotation);
 
 			float distanceToPlayer = (collisionEvents[0].intersection - player.position).magnitude;

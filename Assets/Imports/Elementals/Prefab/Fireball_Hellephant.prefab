@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9f7c081f7bf364b8671010cdb90c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePrefab: {fileID: 400006, guid: 05490f50158ba48a08e9c9e13a996938, type: 2}
+  firePrefab: {fileID: 0}
   zomBunnyPrefab: {fileID: 400000, guid: 6fd694fb865e5524486da2da372b9730, type: 2}
   strikeRadius: 1.20000005
   damage: 10
@@ -7407,6 +7407,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: firePrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

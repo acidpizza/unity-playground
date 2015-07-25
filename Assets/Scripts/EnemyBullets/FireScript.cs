@@ -14,12 +14,14 @@ public class FireScript : MonoBehaviour {
 	ParticleSystem fireParticleSystem;
 	PlayerHealth playerHealth;
 	bool playerInRange;
+	AudioSource audioSource;
 
 	void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerHealth = player.GetComponent <PlayerHealth> ();
 
+		audioSource = GetComponent<AudioSource> ();
 		fireParticleSystem = GetComponent<ParticleSystem> ();
 		Destroy (gameObject, lifetime + 3f);
 	}
@@ -53,6 +55,7 @@ public class FireScript : MonoBehaviour {
 			bullet_assaultRifle.SetActive(false);
 			Quaternion flamingBulletRotation = bullet_assaultRifle.transform.rotation * Quaternion.AngleAxis(90, Vector3.left);
 			Instantiate(flamingBulletPrefab, bullet_assaultRifle.transform.position, flamingBulletRotation);
+			audioSource.Play();
 		}
 	}
 	

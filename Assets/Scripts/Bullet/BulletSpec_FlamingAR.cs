@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BulletSpec_FlamingAR : BulletSpec
 {
+	ParticleSystem bulletParticleSystem;
+	ParticleCollisionEvent[] collisionEvents;
+
 	public BulletSpec_FlamingAR()
 	{
 		timeBetweenBurst = 1.2f;
@@ -20,6 +23,9 @@ public class BulletSpec_FlamingAR : BulletSpec
 
 	void Awake()
 	{
+		bulletParticleSystem = GetComponent<ParticleSystem> ();
+		collisionEvents = new ParticleCollisionEvent[16];
+
 		Destroy (gameObject, 3f);
 	}
 
@@ -29,6 +35,14 @@ public class BulletSpec_FlamingAR : BulletSpec
 
 	void OnParticleCollision(GameObject other)
 	{
+		int numCollisionEvents = bulletParticleSystem.GetCollisionEvents (other, collisionEvents);
+		if(numCollisionEvents > 0)
+		{
+			ParticleSystem hitParticles = Instantiate (hitParticlesPrefab, collisionEvents[0].intersection, hitParticlesPrefab.transform.rotation) as ParticleSystem;
+			hitParticles.Play ();
+			Destroy (hitParticles.gameObject, 0.3f);
+		}
+
 		EnemyHealth enemyHealth = other.GetComponent <EnemyHealth> ();
 		if(enemyHealth != null)
 		{
