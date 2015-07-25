@@ -6,6 +6,7 @@ public class FireScript : MonoBehaviour {
 	public float lifetime = 10f;
 	public float timeBetweenDamage = 1f;
 	public int damage = 10;
+	public Transform flamingBulletPrefab;
 
 	float timer_lifetime = 0f;
 	float timer_damage = 0f;
@@ -45,6 +46,13 @@ public class FireScript : MonoBehaviour {
 		if(other.gameObject == player)
 		{
 			playerInRange = true;
+		}
+		else if(other.gameObject.tag.Equals("Bullet_AssaultRifle"))
+		{
+			GameObject bullet_assaultRifle = other.gameObject;
+			bullet_assaultRifle.SetActive(false);
+			Quaternion flamingBulletRotation = bullet_assaultRifle.transform.rotation * Quaternion.AngleAxis(90, Vector3.left);
+			Transform flamingBullet = Instantiate(flamingBulletPrefab, bullet_assaultRifle.transform.position, flamingBulletRotation) as Transform;
 		}
 	}
 	
