@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 		player_ = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerHealth_ = player_.GetComponent <PlayerHealth> ();
 
-count_zombunny_kills_ = 35;
+//count_zombunny_kills_ = 29;
 	}
 	
 	void Update()
@@ -124,27 +124,27 @@ count_zombunny_kills_ = 35;
 		{
 			if(count_zombunny_kills_ == 0)
 			{
-				zomBunnySpawner_.spawnTime_ = 3.5f;
+				zomBunnySpawner_.spawnTime_ = 2.5f;
 				zomBearSpawner_.spawnTime_ = 999f;
 				attackBotSpawner_.spawnTime_ = 999f;
 			}
 			else if(count_zombunny_kills_ == 3)
 			{
-				attackBotSpawner_.spawnTime_ = 15f;
+				attackBotSpawner_.spawnTime_ = 10f;
 				attackBotSpawner_.gameObject.SetActive(true);
+			}
+			else if(count_zombunny_kills_ == 12)
+			{
+				zomBearSpawner_.spawnTime_ = 15f;
+				zomBearSpawner_.gameObject.SetActive(true);
 			}
 			else if(count_zombunny_kills_ == 18)
 			{
+//attackBotSpawner_.gameObject.SetActive(true);
+//zomBearSpawner_.gameObject.SetActive(true);
+				zomBunnySpawner_.spawnTime_ = 5f;
+				attackBotSpawner_.spawnTime_ = 15f;
 				zomBearSpawner_.spawnTime_ = 17f;
-				zomBearSpawner_.gameObject.SetActive(true);
-			}
-			else if(count_zombunny_kills_ == 36)
-			{
-attackBotSpawner_.gameObject.SetActive(true);
-zomBearSpawner_.gameObject.SetActive(true);
-zomBunnySpawner_.spawnTime_ = 5f;
-attackBotSpawner_.spawnTime_ = 15f;
-zomBearSpawner_.spawnTime_ = 17f;
 				Instantiate (meteorHellephant_, bossSpawnPoint_.position, meteorHellephant_.rotation);
 			}
 			/*
@@ -204,7 +204,7 @@ zomBearSpawner_.spawnTime_ = 17f;
 		zomBearSpawner_.spawnTime_ = 30f;
 
 		attackBotSpawner_.burstSpawn_ = 3;
-		attackBotSpawner_.spawnTime_ = 28f;
+		attackBotSpawner_.spawnTime_ = 30f;
 
 		meteorSpawner_.gameObject.SetActive(true);
 

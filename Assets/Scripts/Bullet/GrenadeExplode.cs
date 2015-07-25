@@ -27,10 +27,13 @@ public class GrenadeExplode : MonoBehaviour
 		while (i < hitColliders.Length) 
 		{
 			EnemyHealth_Hellephant hellephantHealth = hitColliders[i].GetComponent <EnemyHealth_Hellephant> ();
-			if(hellephantHealth != null && !hitColliders[i].isTrigger && !hellephantHealth.IsSecondForm())
+			if(hellephantHealth != null && !hitColliders[i].isTrigger)
 			{
-				hellephantHealth.TakeDamage(explosionDamage);
-				BulletTracker.AmmoHit("Grenade Launcher");
+				if(!hellephantHealth.IsSecondForm())
+				{
+					hellephantHealth.TakeDamage(explosionDamage);
+					BulletTracker.AmmoHit("Grenade Launcher");
+				}
 			}
 			else
 			{

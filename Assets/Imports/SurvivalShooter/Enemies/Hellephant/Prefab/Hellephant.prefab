@@ -589,7 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeSpeed: 1
   audioSource: {fileID: 8222862}
-  clipVolume: .300000012
+  clipVolume: .400000006
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -11072,6 +11072,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: chargeReloadTime
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: clipVolume
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
