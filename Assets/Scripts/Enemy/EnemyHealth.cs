@@ -6,17 +6,19 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 1;
     public AudioClip deathClip;
 	public string enemyName = "ZomBunny";
-	GameManager gameManager;
+
+	protected GameManager gameManager;
+	protected bool isDead;
+	protected AudioSource enemyAudio;
+	protected int currentHealth;
 
     Animator anim;
-    AudioSource enemyAudio;
     CapsuleCollider capsuleCollider;
-    bool isDead;
     bool isSinking;
 	float sinkSpeed = 1f;
-	int currentHealth;
 
-    void Awake ()
+
+	protected virtual void Awake ()
     {
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
@@ -27,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    void Update ()
+    protected virtual void Update ()
     {
         if(isSinking)
         {
@@ -36,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount)
+	public virtual void TakeDamage (int amount)
     {
         if(!isDead)
 		{
@@ -57,7 +59,7 @@ public class EnemyHealth : MonoBehaviour
 	}
 
 
-    void Death ()
+    protected void Death ()
     {
         isDead = true;
 

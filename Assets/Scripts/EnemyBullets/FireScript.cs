@@ -52,7 +52,7 @@ public class FireScript : MonoBehaviour {
 			GameObject bullet_assaultRifle = other.gameObject;
 			bullet_assaultRifle.SetActive(false);
 			Quaternion flamingBulletRotation = bullet_assaultRifle.transform.rotation * Quaternion.AngleAxis(90, Vector3.left);
-			Transform flamingBullet = Instantiate(flamingBulletPrefab, bullet_assaultRifle.transform.position, flamingBulletRotation) as Transform;
+			Instantiate(flamingBulletPrefab, bullet_assaultRifle.transform.position, flamingBulletRotation);
 		}
 	}
 	

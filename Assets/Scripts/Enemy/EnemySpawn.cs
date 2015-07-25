@@ -31,10 +31,6 @@ public class EnemySpawn : MonoBehaviour
 		{
 			Spawn ();
 			timer_ = 0;
-			if(spawnAudioSource != null)
-			{
-				spawnAudioSource.Play ();
-			}
 		}
 	}
 
@@ -45,6 +41,11 @@ public class EnemySpawn : MonoBehaviour
         {
             return;
         }
+
+		if(spawnAudioSource != null)
+		{
+			spawnAudioSource.Play ();
+		}
 
 		spawnPointIndices_.Clear ();
 

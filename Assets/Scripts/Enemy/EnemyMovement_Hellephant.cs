@@ -36,10 +36,11 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	Quaternion dustCloudRotation; 
 
 	FadingAudioSource enemyAttackAudioSource;
-	//AudioSource enemyAttackAudioSource;
 	public AudioClip elephantAttackAudio;
 	public AudioClip stampedeAudio;
 	public AudioClip elephantStompAudio;
+
+	bool secondForm = false;
 
 	enum ActionState
 	{
@@ -61,7 +62,6 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		hellephantEtheralLayer = LayerMask.NameToLayer("HellephantEtheral");
 		dustCloudRotation = dustCloud.transform.rotation;
 
-		//enemyAttackAudioSource = GetComponents<AudioSource> () [1];
 		enemyAttackAudioSource = GetComponent<FadingAudioSource> ();
 	}
 	
@@ -220,8 +220,17 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 
 	void TurnNormal()
 	{
-		gameObject.layer = enemyLayer;
-		hellephantRenderer.material = hellephantNormalMaterial;
+		if(!secondForm)
+		{
+			gameObject.layer = enemyLayer;
+			hellephantRenderer.material = hellephantNormalMaterial;
+		}
+	}
+
+	public void TakeSecondForm()
+	{
+		secondForm = true;
+		TurnEtheral ();
 	}
 
 	void OnTriggerEnter (Collider other)

@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour
 	public EnemySpawn zomBearSpawner_;
 	public EnemySpawn attackBotSpawner_;
 	public EnemySpawn meteorSpawner_;
-	
+
+	public Transform bossSpawnPoint_;
+	public Transform meteorHellephant_;
+
 	int count_zombunny_kills_ = 0;
 	int count_zombear_kills_ = 0;
 	int count_attackBot_kills_ = 0;
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
 
 		player_ = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerHealth_ = player_.GetComponent <PlayerHealth> ();
+
+count_zombunny_kills_ = 35;
 	}
 	
 	void Update()
@@ -85,11 +90,11 @@ public class GameManager : MonoBehaviour
 		if(enemyName == "ZomBunny")
 		{
 			count_zombunny_kills_++;
-			if(count_zombunny_kills_ % 8  == 0)
+			if(count_zombunny_kills_ % 6  == 0)
 			{
 				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
 			}
-			else if(count_zombunny_kills_ % 4 == 0)
+			else if(count_zombunny_kills_ % 3 == 0)
 			{
 				DropPowerUp(powerup_PulseRifle_, enemyPosition);
 			}
@@ -97,11 +102,11 @@ public class GameManager : MonoBehaviour
 		else if(enemyName == "ZomBear")
 		{
 			count_zombear_kills_++;
-			if(count_zombear_kills_ % 4 == 0)
+			if(count_zombear_kills_ % 2 == 0)
 			{
 				DropPowerUp(powerup_Health_, enemyPosition);
 			}
-			else if(count_zombear_kills_ % 2 == 0)
+			else if(count_zombear_kills_ % 1 == 0)
 			{
 				DropPowerUp(powerup_GrenadeLauncher_, enemyPosition);
 			}
@@ -112,27 +117,41 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Game state algo
-		if(count_zombunny_kills_ == 0)
+		if(enemyName == "ZomBunny")
 		{
-			zomBunnySpawner_.spawnTime_ = 3.5f;
-			zomBearSpawner_.spawnTime_ = 999f;
-			attackBotSpawner_.spawnTime_ = 999f;
-		}
-		else if(count_zombunny_kills_ == 4)
-		{
-			attackBotSpawner_.spawnTime_ = 15f;
-			attackBotSpawner_.gameObject.SetActive(true);
-		}
-		else if(count_zombunny_kills_ == 20)
-		{
-			zomBearSpawner_.spawnTime_ = 17f;
-			zomBearSpawner_.gameObject.SetActive(true);
-		}
-		else if(count_zombunny_kills_ % 20 == 0)
-		{
-			zomBunnySpawner_.spawnTime_ *= 0.97f;
-			zomBearSpawner_.spawnTime_ *= 0.97f;
-			attackBotSpawner_.spawnTime_ *= 0.97f;
+			if(count_zombunny_kills_ == 0)
+			{
+				zomBunnySpawner_.spawnTime_ = 3.5f;
+				zomBearSpawner_.spawnTime_ = 999f;
+				attackBotSpawner_.spawnTime_ = 999f;
+			}
+			else if(count_zombunny_kills_ == 3)
+			{
+				attackBotSpawner_.spawnTime_ = 15f;
+				attackBotSpawner_.gameObject.SetActive(true);
+			}
+			else if(count_zombunny_kills_ == 18)
+			{
+				zomBearSpawner_.spawnTime_ = 17f;
+				zomBearSpawner_.gameObject.SetActive(true);
+			}
+			else if(count_zombunny_kills_ == 36)
+			{
+attackBotSpawner_.gameObject.SetActive(true);
+zomBearSpawner_.gameObject.SetActive(true);
+zomBunnySpawner_.spawnTime_ = 5f;
+attackBotSpawner_.spawnTime_ = 15f;
+zomBearSpawner_.spawnTime_ = 17f;
+				Instantiate (meteorHellephant_, bossSpawnPoint_.position, meteorHellephant_.rotation);
+			}
+			/*
+			else if(count_zombunny_kills_ % 20 == 0)
+			{
+				zomBunnySpawner_.spawnTime_ *= 0.97f;
+				zomBearSpawner_.spawnTime_ *= 0.97f;
+				attackBotSpawner_.spawnTime_ *= 0.97f;
+			}
+			*/
 		}
 	}
 
@@ -172,5 +191,18 @@ public class GameManager : MonoBehaviour
 		{
 			statsText_.text += string.Format ("|{0,-16}|{1,-8}|\n", enemyDamageStats.enemyName, enemyDamageStats.damageCount);
 		}
+	}
+
+	public void ActivateBossSecondForm()
+	{
+		zomBunnySpawner_.enabled = false;
+
+		zomBearSpawner_.burstSpawn_ = 2;
+		zomBearSpawner_.spawnTime_ = 30f;
+
+		attackBotSpawner_.burstSpawn_ = 3;
+		attackBotSpawner_.spawnTime_ = 28f;
+
+		meteorSpawner_.gameObject.SetActive(true);
 	}
 }

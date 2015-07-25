@@ -3,8 +3,6 @@ using System.Collections;
 
 public class BulletSpec_FlamingAR : BulletSpec
 {
-	ParticleSystem flamingBulletParticleSystem;
-
 	public BulletSpec_FlamingAR()
 	{
 		timeBetweenBurst = 1.2f;
@@ -22,7 +20,6 @@ public class BulletSpec_FlamingAR : BulletSpec
 
 	void Awake()
 	{
-		flamingBulletParticleSystem = GetComponent<ParticleSystem> ();
 		Destroy (gameObject, 3f);
 	}
 
