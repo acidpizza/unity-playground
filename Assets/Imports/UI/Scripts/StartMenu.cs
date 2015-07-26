@@ -9,8 +9,15 @@ public class StartMenu : MonoBehaviour
 		Cursor.visible = true;
 	}
 
-	public void OnStart()
+	public void OnCampaign()
 	{
+		GameConfig.setting = GameConfig.Setting.Campaign;
+		Application.LoadLevel ("Level1");
+	}
+
+	public void OnSurvival()
+	{
+		GameConfig.setting = GameConfig.Setting.Survial;
 		Application.LoadLevel ("Level1");
 	}
 }

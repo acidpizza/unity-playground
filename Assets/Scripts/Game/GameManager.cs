@@ -25,10 +25,16 @@ public class GameManager : MonoBehaviour
 
 	public Transform bossSpawnPoint_;
 	public Transform meteorHellephant_;
+	public Transform meteorHellephantNormal_;
 
 	int count_zombunny_kills_ = 0;
 	int count_zombear_kills_ = 0;
 	int count_attackBot_kills_ = 0;
+
+	int count_zombunny_drop_AR = 0;
+	int count_zombunny_drop_pulse = 0;
+	int count_zombear_drop_grenade = 0;
+	int count_zombear_drop_health = 0;
 
 	bool pauseGame_ = false;
 	AudioSource audioSource;
@@ -51,7 +57,8 @@ public class GameManager : MonoBehaviour
 		player_ = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerHealth_ = player_.GetComponent <PlayerHealth> ();
 
-count_zombunny_kills_ = 17;
+		SetPowerupDropConditions ();
+//count_zombunny_kills_ = 17;
 	}
 	
 	void Update()
@@ -95,11 +102,11 @@ count_zombunny_kills_ = 17;
 		if(enemyName == "ZomBunny")
 		{
 			count_zombunny_kills_++;
-			if(count_zombunny_kills_ % 6  == 0)
+			if(count_zombunny_kills_ % count_zombunny_drop_AR  == 0)
 			{
 				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
 			}
-			else if(count_zombunny_kills_ % 3 == 0)
+			else if(count_zombunny_kills_ % count_zombunny_drop_pulse == 0)
 			{
 				DropPowerUp(powerup_PulseRifle_, enemyPosition);
 			}
@@ -107,11 +114,12 @@ count_zombunny_kills_ = 17;
 		else if(enemyName == "ZomBear")
 		{
 			count_zombear_kills_++;
-			if(count_zombear_kills_ % 2 == 0)
+
+			if(count_zombear_kills_ % count_zombear_drop_health == 0)
 			{
 				DropPowerUp(powerup_Health_, enemyPosition);
 			}
-			else if(count_zombear_kills_ % 1 == 0)
+			else if(count_zombear_kills_ % count_zombear_drop_grenade == 0)
 			{
 				DropPowerUp(powerup_GrenadeLauncher_, enemyPosition);
 			}
@@ -124,49 +132,115 @@ count_zombunny_kills_ = 17;
 		// Game state algo
 		if(enemyName == "ZomBunny")
 		{
-			if(count_zombunny_kills_ == 0)
+			if(GameConfig.setting == GameConfig.Setting.Campaign)
 			{
-				zomBunnySpawner_.spawnTime_ = 2.5f;
-				zomBearSpawner_.spawnTime_ = 999f;
-				attackBotSpawner_.spawnTime_ = 999f;
+				UpdateGameState_Campaign();
 			}
-			else if(count_zombunny_kills_ == 3)
+			else if(GameConfig.setting == GameConfig.Setting.Survial)
 			{
-				attackBotSpawner_.spawnTime_ = 10f;
-				attackBotSpawner_.gameObject.SetActive(true);
+				UpdateGameState_Survival();
 			}
-			else if(count_zombunny_kills_ == 12)
-			{
-				zomBearSpawner_.spawnTime_ = 15f;
-				zomBearSpawner_.gameObject.SetActive(true);
-			}
-			else if(count_zombunny_kills_ == 18)
-			{
-attackBotSpawner_.gameObject.SetActive(true);
-zomBearSpawner_.gameObject.SetActive(true);
-				zomBunnySpawner_.spawnTime_ = 5f;
-				attackBotSpawner_.spawnTime_ = 15f;
-				zomBearSpawner_.spawnTime_ = 17f;
-				Instantiate (meteorHellephant_, bossSpawnPoint_.position, meteorHellephant_.rotation);
-			}
-			/*
-			else if(count_zombunny_kills_ % 20 == 0)
-			{
-				zomBunnySpawner_.spawnTime_ *= 0.97f;
-				zomBearSpawner_.spawnTime_ *= 0.97f;
-				attackBotSpawner_.spawnTime_ *= 0.97f;
-			}
-			*/
 		}
 	}
 
-	void DropPowerUp(Transform powerup, Transform dropTransform)
+	void UpdateGameState_Campaign()
 	{
-		Vector3 dropPosition = dropTransform.position;
-		dropPosition.y = powerup.position.y;
-		Instantiate (powerup, dropPosition, powerup.rotation);
+		if(count_zombunny_kills_ == 0)
+		{
+			zomBunnySpawner_.spawnTime_ = 2f;
+			zomBearSpawner_.spawnTime_ = 999f;
+			attackBotSpawner_.spawnTime_ = 999f;
+		}
+		else if(count_zombunny_kills_ == 3) // AttackBot Appearance
+		{
+			attackBotSpawner_.spawnTime_ = 12f;
+			attackBotSpawner_.gameObject.SetActive(true);
+		}
+		else if(count_zombunny_kills_ == 12) // Mage Appearance
+		{
+			zomBearSpawner_.spawnTime_ = 15f;
+			zomBearSpawner_.gameObject.SetActive(true);
+		}
+		else if(count_zombunny_kills_ == 18) // Boss Appearance
+		{	
+			attackBotSpawner_.gameObject.SetActive(true);
+			zomBearSpawner_.gameObject.SetActive(true);
+			zomBunnySpawner_.spawnTime_ = 5f;
+			attackBotSpawner_.spawnTime_ = 15f;
+			zomBearSpawner_.spawnTime_ = 17f;
+			Instantiate (meteorHellephant_, bossSpawnPoint_.position, meteorHellephant_.rotation);
+		}
 	}
 
+	public void ActivateBossSecondForm()
+	{
+		zomBunnySpawner_.enabled = false;
+		
+		zomBearSpawner_.burstSpawn_ = 2;
+		zomBearSpawner_.spawnTime_ = 34f;
+		zomBearSpawner_.SpawnNow ();
+		
+		attackBotSpawner_.burstSpawn_ = 2;
+		attackBotSpawner_.spawnTime_ = 25f;
+		attackBotSpawner_.SpawnNow ();
+		
+		meteorSpawner_.burstSpawn_ = 5;
+		meteorSpawner_.spawnTime_ = 25f;
+		meteorSpawner_.SpawnNow ();
+		meteorSpawner_.gameObject.SetActive(true);
+		
+		audioSource.Play ();
+	}
+
+	void UpdateGameState_Survival()
+	{
+		if(count_zombunny_kills_ == 0)
+		{
+			zomBunnySpawner_.spawnTime_ = 2f;
+			zomBearSpawner_.spawnTime_ = 999f;
+			attackBotSpawner_.spawnTime_ = 999f;
+		}
+		else if(count_zombunny_kills_ == 3)
+		{
+			attackBotSpawner_.spawnTime_ = 13f;
+			attackBotSpawner_.gameObject.SetActive(true);
+		}
+		else if(count_zombunny_kills_ == 12)
+		{
+			zomBearSpawner_.spawnTime_ = 17f;
+			zomBearSpawner_.gameObject.SetActive(true);
+		}
+		else if(count_zombunny_kills_ == 18)
+		{
+			zomBunnySpawner_.spawnTime_ = 3.5f;
+		}
+		else if(count_zombunny_kills_ % 20 == 0)
+		{
+			zomBunnySpawner_.spawnTime_ *= 0.97f;
+			zomBearSpawner_.spawnTime_ *= 0.97f;
+			attackBotSpawner_.spawnTime_ *= 0.97f;
+			Instantiate (meteorHellephantNormal_, bossSpawnPoint_.position, meteorHellephantNormal_.rotation);
+		}
+	}
+
+	void SetPowerupDropConditions()
+	{
+		if(GameConfig.setting == GameConfig.Setting.Campaign)
+		{
+			count_zombunny_drop_AR = 6;
+			count_zombunny_drop_pulse = 3;
+			count_zombear_drop_health = 2;
+			count_zombear_drop_grenade = 1;
+		}
+		else if(GameConfig.setting == GameConfig.Setting.Survial)
+		{
+			count_zombunny_drop_AR = 6;
+			count_zombunny_drop_pulse = 3;
+			count_zombear_drop_health = 4;
+			count_zombear_drop_grenade = 2;
+		}
+	}
+	
 	public void FormatStats()
 	{
 		statsText_.text = "";
@@ -198,21 +272,6 @@ zomBearSpawner_.gameObject.SetActive(true);
 		}
 	}
 
-	public void ActivateBossSecondForm()
-	{
-		zomBunnySpawner_.enabled = false;
-
-		zomBearSpawner_.burstSpawn_ = 2;
-		zomBearSpawner_.spawnTime_ = 30f;
-
-		attackBotSpawner_.burstSpawn_ = 3;
-		attackBotSpawner_.spawnTime_ = 30f;
-
-		meteorSpawner_.gameObject.SetActive(true);
-
-		audioSource.Play ();
-	}
-
 	public void WinGame()
 	{
 		meteorSpawner_.enabled = false;
@@ -220,5 +279,12 @@ zomBearSpawner_.gameObject.SetActive(true);
 		attackBotSpawner_.enabled = false;
 		zomBearSpawner_.enabled = false;
 		win_ = true;
+	}
+
+	void DropPowerUp(Transform powerup, Transform dropTransform)
+	{
+		Vector3 dropPosition = dropTransform.position;
+		dropPosition.y = powerup.position.y;
+		Instantiate (powerup, dropPosition, powerup.rotation);
 	}
 }

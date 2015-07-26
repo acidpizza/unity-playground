@@ -62,4 +62,9 @@ public class EnemySpawn : MonoBehaviour
         	Instantiate (enemy_, spawnPoints_[spawnPointIndex].position, enemy_.transform.rotation);
 		}
     }
+
+	public void SpawnNow()
+	{
+		timer_ = 999f;
+	}
 }

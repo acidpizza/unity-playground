@@ -19,7 +19,7 @@ GameObject:
   - 82: {fileID: 8222862}
   - 114: {fileID: 11433086}
   m_Layer: 10
-  m_Name: Hellephant
+  m_Name: Hellephant_Normal
   m_TagString: Hellephant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,10 +629,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87dbd43fc6f434d42a39076d15a8e94d, type: 3}
+  m_Script: {fileID: 11500000, guid: a9b9d14572410594cb85d40eedfb150c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 2000
+  startingHealth: 1000
   scoreValue: 1
   deathClip: {fileID: 8300000, guid: ddca6e9e3e76e844185240d5c1f3d210, type: 3}
   enemyName: Hellephant
@@ -11434,6 +11434,10 @@ Prefab:
       propertyPath: deathClip
       value: 
       objectReference: {fileID: 8300000, guid: ddca6e9e3e76e844185240d5c1f3d210, type: 3}
+    - target: {fileID: 0}
+      propertyPath: startingHealth
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}

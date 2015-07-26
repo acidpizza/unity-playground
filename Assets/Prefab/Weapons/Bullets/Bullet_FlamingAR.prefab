@@ -110,8 +110,8 @@ MonoBehaviour:
   shootForce: 10
   shootSpread: 1
   bulletCount: 30
-  bulletName: Flame AR
-  shootAudio: {fileID: 0}
+  bulletName: Assault Rifle
+  shootAudio: {fileID: 8300000, guid: ebc86758e4161864fac1c3d71aa35537, type: 3}
   isProjectile: 0
   liftForce: 0
   forwardTorque: 0
@@ -3126,7 +3126,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: bulletName
-      value: FlamingAR
+      value: Assault Rifle
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -3135,7 +3135,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: shootAudio
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: ebc86758e4161864fac1c3d71aa35537, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 166132}

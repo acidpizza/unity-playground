@@ -7844,6 +7844,8 @@ MonoBehaviour:
   meteorSpawner_: {fileID: 1798272401}
   bossSpawnPoint_: {fileID: 373833880}
   meteorHellephant_: {fileID: 400010, guid: 3036e80920066814bafed61865033b72, type: 2}
+  meteorHellephantNormal_: {fileID: 400010, guid: d5ea1c5f2f8fe364eb3df8f36206949b,
+    type: 2}
 --- !u!4 &1496171719
 Transform:
   m_ObjectHideFlags: 0
