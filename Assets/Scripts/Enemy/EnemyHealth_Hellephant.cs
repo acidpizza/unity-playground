@@ -4,11 +4,15 @@ public class EnemyHealth_Hellephant : EnemyHealth
 {
 	EnemyMovement_Hellephant hellephantMovement;
 	bool secondForm = false;
+	HealthUI_Hellephant healthUI;
 
 	protected override void Awake ()
 	{
 		base.Awake ();
 		hellephantMovement = GetComponent<EnemyMovement_Hellephant> ();
+		healthUI = GetComponentInChildren<HealthUI_Hellephant> ();
+		healthUI.SetHealth (startingHealth);
+		Debug.Log ("Health set to " + startingHealth);
 	}
 
 
@@ -19,12 +23,15 @@ public class EnemyHealth_Hellephant : EnemyHealth
 
     public override void TakeDamage (int amount)
     {
+		Debug.Log ("Damage is " + amount);
+
         if(!isDead)
 		{
 	        enemyAudio.Play ();
 
 	        currentHealth -= amount;
-	        
+			healthUI.TakeDamage(amount);
+
 	        if(currentHealth <= 0)
 	        {
 	            Death ();
@@ -40,6 +47,7 @@ public class EnemyHealth_Hellephant : EnemyHealth
 	{
 		hellephantMovement.TakeSecondForm ();
 		gameManager.ActivateBossSecondForm ();
+		healthUI.SetLowHealthStatus ();
 		secondForm = true;
 	}
 
