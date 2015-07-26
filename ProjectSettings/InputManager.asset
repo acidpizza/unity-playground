@@ -294,10 +294,10 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: ChangeWeaponRight
+    m_Name: ChangeWeapon
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: q
     positiveButton: e
     altNegativeButton: 
     altPositiveButton: 
@@ -310,13 +310,13 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: ChangeWeaponLeft
+    m_Name: Zoom
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: q
+    negativeButton: '-'
+    positiveButton: +
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: =
     gravity: 3
     dead: .00100000005
     sensitivity: 3

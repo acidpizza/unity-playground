@@ -22,6 +22,7 @@ public class GrenadeExplode : MonoBehaviour
 		explosionAudio.Play();
 		explosionParticles.Play ();
 
+		bool enemyHit = false;
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
 		int i = 0;
 		while (i < hitColliders.Length) 
@@ -32,7 +33,7 @@ public class GrenadeExplode : MonoBehaviour
 				if(!hellephantHealth.IsSecondForm())
 				{
 					hellephantHealth.TakeDamage(explosionDamage);
-					BulletTracker.AmmoHit("Grenade Launcher");
+					enemyHit = true;
 				}
 			}
 			else
@@ -41,10 +42,15 @@ public class GrenadeExplode : MonoBehaviour
 				if(enemyHealth != null && !hitColliders[i].isTrigger)
 				{
 					enemyHealth.TakeDamage(explosionDamage);
-					BulletTracker.AmmoHit("Grenade Launcher");
+					enemyHit = true;
 				}
 			}
 			i++;
+		}
+
+		if(enemyHit)
+		{
+			BulletTracker.AmmoHit("Grenade Launcher");
 		}
 
 		Destroy (gameObject, 5f);

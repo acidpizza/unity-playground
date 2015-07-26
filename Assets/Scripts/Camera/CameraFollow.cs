@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour {
 
 	Vector3 offset;
 
-	public float zoomSensitivity = 15.0f;
+	public float zoomSensitivity = 1f;
 	public float zoomSpeed = 5.0f;
 	public float zoomMin = 5.0f;
 	public float zoomMax = 25.0f;
@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour {
 
 	void Update() 
 	{
-		zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity;
+		zoom -= Input.GetAxisRaw("Zoom") * zoomSensitivity;
 		zoom = Mathf.Clamp(zoom, zoomMin, zoomMax);
 	}
 

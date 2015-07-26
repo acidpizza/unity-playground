@@ -2501,7 +2501,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 369683963}
   m_LocalRotation: {x: .258819073, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: 15, z: -25}
+  m_LocalPosition: {x: 0, y: 15, z: -26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2519,10 +2519,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 399515770}
   smoothing: 5
-  zoomSensitivity: 15
+  zoomSensitivity: .5
   zoomSpeed: 5
   zoomMin: 5
-  zoomMax: 25
+  zoomMax: 30
 --- !u!4 &370838994 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a4b268e7687a6de41832ec37bd64ea8c, type: 3}
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8359d4417150f504f8f54afda4f22736, type: 3}
-    m_FontSize: 20
+    m_FontSize: 16
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
