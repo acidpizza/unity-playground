@@ -3,12 +3,12 @@ using System.Collections;
 
 public class GameConfig : MonoBehaviour
 {
-	public enum Difficulty
+	public enum Setting
 	{
-		Easy, Normal, Hard
+		Campaign, Survival
 	};
 
-	public static Difficulty difficulty = Difficulty.Normal;
+	public static Setting setting = Setting.Campaign;
 
 	void Awake()
 	{

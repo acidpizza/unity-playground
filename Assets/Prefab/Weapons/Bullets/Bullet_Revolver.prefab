@@ -14,8 +14,8 @@ GameObject:
   - 54: {fileID: 5495494}
   - 114: {fileID: 11467594}
   - 96: {fileID: 9623332}
-  m_Layer: 0
-  m_Name: Bullet_Pistol
+  m_Layer: 13
+  m_Name: Bullet_Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,8 +144,11 @@ MonoBehaviour:
   shootForce: 6
   shootSpread: 2
   bulletCount: 0
-  bulletName: Pistol
+  bulletName: Revolver
   shootAudio: {fileID: 8300000, guid: 28bcce9c8c00a5f4190e0e125241efa7, type: 3}
+  isProjectile: 0
+  liftForce: 0
+  forwardTorque: 0
 --- !u!136 &13682924
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -260,6 +263,14 @@ Prefab:
       propertyPath: shootAudio
       value: 
       objectReference: {fileID: 8300000, guid: 28bcce9c8c00a5f4190e0e125241efa7, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bulletName
+      value: Revolver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154898}

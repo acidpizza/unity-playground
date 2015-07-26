@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletSpec_Pistol : BulletSpec
+public class BulletSpec_Revolver : BulletSpec
 {
-	public BulletSpec_Pistol()
+	public BulletSpec_Revolver()
 	{
 		timeBetweenBurst = 1f;
 		burstRounds = 6;
@@ -15,6 +15,6 @@ public class BulletSpec_Pistol : BulletSpec
 		shootSpread = 2f;
 
 		bulletCount = 0;
-		bulletName = "Pistol";
+		bulletName = "Revolver";
 	}	
 }

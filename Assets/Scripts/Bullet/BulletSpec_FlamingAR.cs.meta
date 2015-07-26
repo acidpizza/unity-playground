@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e6f1a497c2d12c64086d2ea0bc6db5f1
+timeCreated: 1437816381
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - hitParticlesPrefab: {fileID: 19896466, guid: 9bdecd0198210214d93f2209643ac04f,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

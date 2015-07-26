@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 450834}
   - 33: {fileID: 3388532}
   - 23: {fileID: 2374562}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 491940}
   - 33: {fileID: 3385068}
   - 23: {fileID: 2394624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: splint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 54: {fileID: 5499386}
   - 136: {fileID: 13636418}
   - 114: {fileID: 11446520}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bullet_GrenadeLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 4: {fileID: 468596}
   - 33: {fileID: 3363896}
   - 23: {fileID: 2382954}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: spoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - 4: {fileID: 441586}
   - 33: {fileID: 3371042}
   - 23: {fileID: 2325520}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - 4: {fileID: 440570}
   - 33: {fileID: 3365700}
   - 23: {fileID: 2395632}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,6 +436,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletLifeTime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

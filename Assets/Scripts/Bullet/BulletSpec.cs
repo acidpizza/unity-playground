@@ -38,7 +38,7 @@ public class BulletSpec : MonoBehaviour
 				enemyHealth.TakeDamage (damagePerShot/3); // ZomBear has resistance to pulse rifle
 
 			}
-			else if(enemyHealth.enemyName == "AttackBot" && (bulletName == "Assault Rifle" || bulletName == "Pistol"))
+			else if(enemyHealth.enemyName == "AttackBot" && (bulletName == "Assault Rifle" || bulletName == "Revolver"))
 			{
 				enemyHealth.TakeDamage (damagePerShot/2); // AttackBot has resistance to mechanical bullets
 				

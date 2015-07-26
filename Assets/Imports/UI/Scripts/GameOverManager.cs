@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverManager : MonoBehaviour
 {
     Animator anim;
+	public Text gameOverText;
 
     void Awake()
     {
@@ -18,5 +20,11 @@ public class GameOverManager : MonoBehaviour
 	public void RestartApplication()
 	{
 		Application.LoadLevel ("StartMenu");
+	}
+
+	public void Win()
+	{
+		gameOverText.text = "YOU WIN!!!";
+		GameOver ();
 	}
 }

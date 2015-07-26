@@ -97,13 +97,13 @@ public class PlayerShooting : MonoBehaviour
 	{
 		currentAmmoTracker.timer += Time.deltaTime;
 
-		if(Input.GetButtonDown ("ChangeWeaponRight"))
+		if(Input.GetAxisRaw ("Mouse ScrollWheel") > 0 || (Input.GetButtonDown ("ChangeWeapon") && Input.GetAxisRaw ("ChangeWeapon") < 0))
 		{
-			ChangeWeapon (true);
+			ChangeWeapon(false); // Change left
 		}
-		else if(Input.GetButtonDown ("ChangeWeaponLeft"))
+		else if(Input.GetAxisRaw ("Mouse ScrollWheel") < 0 || (Input.GetButtonDown ("ChangeWeapon") && Input.GetAxisRaw ("ChangeWeapon") > 0))
 		{
-			ChangeWeapon (false);
+			ChangeWeapon(true); // Change right
 		}
 
 		if(Input.GetButton ("Fire1") && Time.timeScale != 0) // Want to fire and game is not paused

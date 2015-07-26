@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - New Tag
+  - Bullet_AssaultRifle
+  - Hellephant
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,11 +19,11 @@ TagManager:
   - Floor
   - Enemy
   - EnemyBullet
-  - 
-  - 
-  - 
-  - 
-  - 
+  - HellephantEtheral
+  - Player
+  - PlayerBullet
+  - Meteor
+  - PlayerFlamingBullet
   - 
   - 
   - 
