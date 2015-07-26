@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour {
 	void Start()
 	{
 		cam = GetComponent<Camera>();
-		zoom = cam.fieldOfView;
+		zoom = GameConfig.zoom;
 		offset = transform.position - target.position;
 	}
 
@@ -25,6 +25,7 @@ public class CameraFollow : MonoBehaviour {
 	{
 		zoom -= Input.GetAxisRaw("Zoom") * zoomSensitivity;
 		zoom = Mathf.Clamp(zoom, zoomMin, zoomMax);
+		GameConfig.zoom = zoom;
 	}
 
 	void LateUpdate()

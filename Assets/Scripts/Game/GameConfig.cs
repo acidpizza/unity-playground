@@ -9,6 +9,7 @@ public class GameConfig : MonoBehaviour
 	};
 
 	public static Setting setting = Setting.Campaign;
+	public static float zoom = 20f;
 
 	void Awake()
 	{
