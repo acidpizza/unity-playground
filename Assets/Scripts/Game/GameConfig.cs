@@ -5,7 +5,7 @@ public class GameConfig : MonoBehaviour
 {
 	public enum Setting
 	{
-		Campaign, Survial
+		Campaign, Survival
 	};
 
 	public static Setting setting = Setting.Campaign;

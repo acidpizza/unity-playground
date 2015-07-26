@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
 			{
 				UpdateGameState_Campaign();
 			}
-			else if(GameConfig.setting == GameConfig.Setting.Survial)
+			else if(GameConfig.setting == GameConfig.Setting.Survival)
 			{
 				UpdateGameState_Survival();
 			}
@@ -232,7 +232,7 @@ public class GameManager : MonoBehaviour
 			count_zombear_drop_health = 2;
 			count_zombear_drop_grenade = 1;
 		}
-		else if(GameConfig.setting == GameConfig.Setting.Survial)
+		else if(GameConfig.setting == GameConfig.Setting.Survival)
 		{
 			count_zombunny_drop_AR = 6;
 			count_zombunny_drop_pulse = 3;
@@ -244,6 +244,14 @@ public class GameManager : MonoBehaviour
 	public void FormatStats()
 	{
 		statsText_.text = "";
+		if(GameConfig.setting == GameConfig.Setting.Campaign)
+		{
+			statsText_.text = "Campaign Mode Stats: \n\n";
+		}
+		else if(GameConfig.setting == GameConfig.Setting.Survival)
+		{
+			statsText_.text = "Survival Mode Stats: \n\n";
+		}
 
 		statsText_.text += "|     Weapon     | Collected |  Shot  |  Hit  | % Used | % Accuracy |\n";
 		foreach( BulletTracker.BulletStats bulletStat in BulletTracker.bulletStatsList)

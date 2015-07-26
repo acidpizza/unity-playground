@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour
 
 	public void OnSurvival()
 	{
-		GameConfig.setting = GameConfig.Setting.Survial;
+		GameConfig.setting = GameConfig.Setting.Survival;
 		Application.LoadLevel ("Level1");
 	}
 }
