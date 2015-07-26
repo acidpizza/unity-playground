@@ -63,6 +63,8 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		dustCloudRotation = dustCloud.transform.rotation;
 
 		enemyAttackAudioSource = GetComponent<FadingAudioSource> ();
+
+		TurnNormal ();
 	}
 	
     void Update ()
@@ -233,6 +235,13 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	{
 		secondForm = true;
 		TurnEtheral ();
+	}
+
+	public void RevertToFirstForm()
+	{
+		secondForm = false;
+		TurnNormal ();
+		enemyAttackAudioSource.Stop ();
 	}
 
 	void OnTriggerEnter (Collider other)

@@ -5,6 +5,7 @@ public class EnemyHealth_Hellephant : EnemyHealth
 	EnemyMovement_Hellephant hellephantMovement;
 	bool secondForm = false;
 	HealthUI_Hellephant healthUI;
+	GameOverManager gameOverManager;
 
 	protected override void Awake ()
 	{
@@ -12,7 +13,8 @@ public class EnemyHealth_Hellephant : EnemyHealth
 		hellephantMovement = GetComponent<EnemyMovement_Hellephant> ();
 		healthUI = GetComponentInChildren<HealthUI_Hellephant> ();
 		healthUI.SetHealth (startingHealth);
-		Debug.Log ("Health set to " + startingHealth);
+	
+		gameOverManager = FindObjectOfType(typeof(GameOverManager)) as GameOverManager;
 	}
 
 
@@ -23,8 +25,6 @@ public class EnemyHealth_Hellephant : EnemyHealth
 
     public override void TakeDamage (int amount)
     {
-		Debug.Log ("Damage is " + amount);
-
         if(!isDead)
 		{
 	        enemyAudio.Play ();
@@ -54,5 +54,37 @@ public class EnemyHealth_Hellephant : EnemyHealth
 	public bool IsSecondForm()
 	{
 		return secondForm;
+	}
+
+	protected override void Death()
+	{
+		hellephantMovement.RevertToFirstForm ();
+		Invoke ("KillAllEnemies", 3f);
+		gameManager.WinGame ();
+		base.Death ();
+	}
+
+	public override void StartSinking ()
+	{
+		GetComponent <NavMeshAgent> ().enabled = false;
+		GetComponent <Rigidbody> ().isKinematic = true;
+		//isSinking = true;
+		gameManager.AddScore(scoreValue, enemyName, transform);
+		//Destroy (gameObject, 2f);
+	}
+
+	void KillAllEnemies()
+	{
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+		foreach (GameObject enemy in enemies)
+		{
+			enemy.GetComponent<EnemyHealth>().TakeDamage(99999);
+		}
+		Invoke ("Win", 2f);
+	}
+
+	void Win()
+	{
+		gameOverManager.Win ();
 	}
 }

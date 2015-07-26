@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
 
 	Transform player_;
 	PlayerHealth playerHealth_;
-	
+
+	bool win_ = false;
+
 	void Awake ()
     {
 		audioSource = GetComponent<AudioSource> ();
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
 		player_ = GameObject.FindGameObjectWithTag ("Player").transform;
 		playerHealth_ = player_.GetComponent <PlayerHealth> ();
 
-//count_zombunny_kills_ = 29;
+count_zombunny_kills_ = 17;
 	}
 	
 	void Update()
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if(playerHealth_.IsDead() && !statsUpdated_)
+		if((playerHealth_.IsDead() || win_) && !statsUpdated_)
 		{
 			statsUpdated_ = true;
 			Invoke("FormatStats", 5f);
@@ -140,8 +142,8 @@ public class GameManager : MonoBehaviour
 			}
 			else if(count_zombunny_kills_ == 18)
 			{
-//attackBotSpawner_.gameObject.SetActive(true);
-//zomBearSpawner_.gameObject.SetActive(true);
+attackBotSpawner_.gameObject.SetActive(true);
+zomBearSpawner_.gameObject.SetActive(true);
 				zomBunnySpawner_.spawnTime_ = 5f;
 				attackBotSpawner_.spawnTime_ = 15f;
 				zomBearSpawner_.spawnTime_ = 17f;
@@ -209,5 +211,14 @@ public class GameManager : MonoBehaviour
 		meteorSpawner_.gameObject.SetActive(true);
 
 		audioSource.Play ();
+	}
+
+	public void WinGame()
+	{
+		meteorSpawner_.enabled = false;
+		zomBunnySpawner_.enabled = false;
+		attackBotSpawner_.enabled = false;
+		zomBearSpawner_.enabled = false;
+		win_ = true;
 	}
 }

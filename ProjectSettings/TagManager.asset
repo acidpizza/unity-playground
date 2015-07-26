@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet_AssaultRifle
   - Hellephant
+  - Enemy
   layers:
   - Default
   - TransparentFX

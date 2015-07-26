@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     Animator anim;
     CapsuleCollider capsuleCollider;
-    bool isSinking;
+    protected bool isSinking;
 	float sinkSpeed = 1f;
 
 
@@ -59,7 +59,7 @@ public class EnemyHealth : MonoBehaviour
 	}
 
 
-    protected void Death ()
+    protected virtual void Death ()
     {
         isDead = true;
 
@@ -72,7 +72,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void StartSinking ()
+    public virtual void StartSinking ()
     {
         GetComponent <NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
