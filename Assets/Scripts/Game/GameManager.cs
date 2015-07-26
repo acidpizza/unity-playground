@@ -177,11 +177,11 @@ public class GameManager : MonoBehaviour
 		zomBunnySpawner_.enabled = false;
 		
 		zomBearSpawner_.burstSpawn_ = 2;
-		zomBearSpawner_.spawnTime_ = 34f;
+		zomBearSpawner_.spawnTime_ = 33f;
 		zomBearSpawner_.SpawnNow ();
 		
 		attackBotSpawner_.burstSpawn_ = 2;
-		attackBotSpawner_.spawnTime_ = 25f;
+		attackBotSpawner_.spawnTime_ = 29f;
 		attackBotSpawner_.SpawnNow ();
 		
 		meteorSpawner_.burstSpawn_ = 5;
@@ -244,13 +244,18 @@ public class GameManager : MonoBehaviour
 	public void FormatStats()
 	{
 		statsText_.text = "";
+		if(win_)
+		{
+			statsText_.text += "Congrats for clearing the game! Hope you had fun playing =P\n\n";
+		}
+
 		if(GameConfig.setting == GameConfig.Setting.Campaign)
 		{
-			statsText_.text = "Campaign Mode Stats: \n\n";
+			statsText_.text += "Campaign Mode Stats: \n\n";
 		}
 		else if(GameConfig.setting == GameConfig.Setting.Survival)
 		{
-			statsText_.text = "Survival Mode Stats: \n\n";
+			statsText_.text += "Survival Mode Stats: \n\n";
 		}
 
 		statsText_.text += "|     Weapon     | Collected |  Shot  |  Hit  | % Used | % Accuracy |\n";
@@ -287,6 +292,9 @@ public class GameManager : MonoBehaviour
 		attackBotSpawner_.enabled = false;
 		zomBearSpawner_.enabled = false;
 		win_ = true;
+		playerHealth_.gameObject.GetComponent<PlayerMovement>().enabled = false;
+		playerHealth_.gameObject.GetComponentInChildren<PlayerShooting>().enabled = false;
+		playerHealth_.Win ();
 	}
 
 	void DropPowerUp(Transform powerup, Transform dropTransform)

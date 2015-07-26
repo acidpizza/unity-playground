@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
 	bool isDead;
 	int currentHealth;
 
+	bool win = false;
+
     void Awake ()
     {
         anim = GetComponent <Animator> ();
@@ -34,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
 	public void TakeDamage (string enemyName, int value)
     {
-		if(!isDead)
+		if(!isDead && !win)
 		{
 	        currentHealth -= value;
 			healthUI.TakeDamage (value);
@@ -81,5 +83,10 @@ public class PlayerHealth : MonoBehaviour
 	void TriggerGameOverUI()
 	{
 		gameOverManager.GameOver ();
+	}
+
+	public void Win()
+	{
+		win = true;
 	}
 }
