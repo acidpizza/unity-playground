@@ -84,13 +84,13 @@ public class GameManager : MonoBehaviour
 		if((playerHealth_.IsDead() || win_) && !statsUpdated_)
 		{
 			statsUpdated_ = true;
-			Invoke("FormatStats", 5f);
+			Invoke("FormatStats", 3f);
 		}
 	}
 	
 	public void AddScore(int value, string enemyName, Transform enemyPosition)
 	{
-		if(!enemyName.Equals(""))
+		if(!enemyName.Equals("")) // Avoid adding a kill to blank during initialisation
 		{
 			BulletTracker.EnemyKill (enemyName);
 		}

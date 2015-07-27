@@ -61,6 +61,8 @@ public class EnemyHealth : MonoBehaviour
 
     protected virtual void Death ()
     {
+		gameManager.AddScore(scoreValue, enemyName, transform);
+
         isDead = true;
 
         capsuleCollider.isTrigger = true;
@@ -77,7 +79,6 @@ public class EnemyHealth : MonoBehaviour
         GetComponent <NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
-        gameManager.AddScore(scoreValue, enemyName, transform);
         Destroy (gameObject, 2f);
     }
 }
