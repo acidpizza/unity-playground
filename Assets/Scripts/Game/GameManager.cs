@@ -102,13 +102,28 @@ public class GameManager : MonoBehaviour
 		if(enemyName == "ZomBunny")
 		{
 			count_zombunny_kills_++;
-			if(count_zombunny_kills_ % count_zombunny_drop_AR  == 0)
+
+			if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore)
 			{
-				DropPowerUp(powerup_AssaultRifle_, enemyPosition);
+				if(count_zombunny_kills_ % count_zombunny_drop_pulse == 0)
+				{
+					DropPowerUp(powerup_PulseRifle_, enemyPosition);
+				}
+				else if(count_zombunny_kills_ % count_zombunny_drop_AR  == 0)
+				{
+					DropPowerUp(powerup_AssaultRifle_, enemyPosition);
+				}
 			}
-			else if(count_zombunny_kills_ % count_zombunny_drop_pulse == 0)
+			else
 			{
-				DropPowerUp(powerup_PulseRifle_, enemyPosition);
+				if(count_zombunny_kills_ % count_zombunny_drop_AR  == 0)
+				{
+					DropPowerUp(powerup_AssaultRifle_, enemyPosition);
+				}
+				else if(count_zombunny_kills_ % count_zombunny_drop_pulse == 0)
+				{
+					DropPowerUp(powerup_PulseRifle_, enemyPosition);
+				}
 			}
 		}
 		else if(enemyName == "ZomBear")
@@ -130,44 +145,71 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Game state algo
-		if(enemyName == "ZomBunny")
+		if(enemyName.Equals("ZomBunny") || enemyName.Equals(""))
 		{
-			if(GameConfig.setting == GameConfig.Setting.Campaign)
+			if(GameConfig.gameMode == GameConfig.GameMode.Campaign)
 			{
 				UpdateGameState_Campaign();
 			}
-			else if(GameConfig.setting == GameConfig.Setting.Survival)
+			else if(GameConfig.gameMode == GameConfig.GameMode.Survival)
 			{
 				UpdateGameState_Survival();
 			}
 		}
 	}
 
+
+
 	void UpdateGameState_Campaign()
 	{
 		if(count_zombunny_kills_ == 0)
 		{
-			zomBunnySpawner_.spawnTime_ = 2f;
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill){zomBunnySpawner_.spawnTime_ = 5f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge){zomBunnySpawner_.spawnTime_ = 3f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore){ zomBunnySpawner_.spawnTime_ = 2f; }
+
 			zomBearSpawner_.spawnTime_ = 999f;
 			attackBotSpawner_.spawnTime_ = 999f;
 		}
 		else if(count_zombunny_kills_ == 3) // AttackBot Appearance
 		{
-			attackBotSpawner_.spawnTime_ = 12f;
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill){ attackBotSpawner_.spawnTime_ = 18f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge){attackBotSpawner_.spawnTime_ = 13.5f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore){ attackBotSpawner_.spawnTime_ = 12f; }
+
 			attackBotSpawner_.gameObject.SetActive(true);
 		}
 		else if(count_zombunny_kills_ == 12) // Mage Appearance
 		{
-			zomBearSpawner_.spawnTime_ = 15f;
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill){ zomBearSpawner_.spawnTime_ = 22f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge){ zomBearSpawner_.spawnTime_ = 17f; }
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore){ zomBearSpawner_.spawnTime_ = 15f; }
+
 			zomBearSpawner_.gameObject.SetActive(true);
 		}
 		else if(count_zombunny_kills_ == 18) // Boss Appearance
 		{	
 			attackBotSpawner_.gameObject.SetActive(true);
 			zomBearSpawner_.gameObject.SetActive(true);
-			zomBunnySpawner_.spawnTime_ = 5f;
-			attackBotSpawner_.spawnTime_ = 15f;
-			zomBearSpawner_.spawnTime_ = 17f;
+
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill)
+			{ 
+				zomBunnySpawner_.spawnTime_ = 6f;
+				attackBotSpawner_.spawnTime_ = 20f;
+				zomBearSpawner_.spawnTime_ = 24f;
+			}
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge)
+			{ 
+				zomBunnySpawner_.spawnTime_ = 5f;
+				attackBotSpawner_.spawnTime_ = 15f;
+				zomBearSpawner_.spawnTime_ = 18f;
+			}
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore)
+			{
+				zomBunnySpawner_.spawnTime_ = 4f;
+				attackBotSpawner_.spawnTime_ = 13f;
+				zomBearSpawner_.spawnTime_ = 15f;
+			}
 			Instantiate (meteorHellephant_, bossSpawnPoint_.position, meteorHellephant_.rotation);
 		}
 	}
@@ -175,18 +217,38 @@ public class GameManager : MonoBehaviour
 	public void ActivateBossSecondForm()
 	{
 		zomBunnySpawner_.enabled = false;
-		
-		zomBearSpawner_.burstSpawn_ = 2;
-		zomBearSpawner_.spawnTime_ = 33f;
-		zomBearSpawner_.SpawnNow ();
-		
-		attackBotSpawner_.burstSpawn_ = 2;
-		attackBotSpawner_.spawnTime_ = 29f;
-		attackBotSpawner_.SpawnNow ();
-		
-		meteorSpawner_.burstSpawn_ = 5;
-		meteorSpawner_.spawnTime_ = 25f;
+
+		if(GameConfig.difficulty == GameConfig.Difficulty.Chill)
+		{
+			meteorSpawner_.spawnTime_ = 33f;
+			meteorSpawner_.burstSpawn_ = 5;
+			attackBotSpawner_.spawnTime_ = 20f;
+			attackBotSpawner_.burstSpawn_ = 1;
+			zomBearSpawner_.spawnTime_ = 25f;
+			zomBearSpawner_.burstSpawn_ = 1;
+		}
+		else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge)
+		{
+			meteorSpawner_.spawnTime_ = 27f;
+			meteorSpawner_.burstSpawn_ = 5;
+			attackBotSpawner_.spawnTime_ = 32f;
+			attackBotSpawner_.burstSpawn_ = 2;
+			zomBearSpawner_.spawnTime_ = 38f;
+			zomBearSpawner_.burstSpawn_ = 2;
+		}
+		else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore)
+		{
+			meteorSpawner_.spawnTime_ = 25f;
+			meteorSpawner_.burstSpawn_ = 5;
+			attackBotSpawner_.spawnTime_ = 29f;
+			attackBotSpawner_.burstSpawn_ = 2;
+			zomBearSpawner_.spawnTime_ = 33f;
+			zomBearSpawner_.burstSpawn_ = 2;
+		}
 		meteorSpawner_.SpawnNow ();
+		attackBotSpawner_.SpawnNow ();
+		zomBearSpawner_.SpawnNow ();		
+
 		meteorSpawner_.gameObject.SetActive(true);
 		
 		audioSource.Play ();
@@ -207,7 +269,7 @@ public class GameManager : MonoBehaviour
 		}
 		else if(count_zombunny_kills_ == 12)
 		{
-			zomBearSpawner_.spawnTime_ = 17f;
+			zomBearSpawner_.spawnTime_ = 17f; 
 			zomBearSpawner_.gameObject.SetActive(true);
 		}
 		else if(count_zombunny_kills_ == 18)
@@ -225,14 +287,26 @@ public class GameManager : MonoBehaviour
 
 	void SetPowerupDropConditions()
 	{
-		if(GameConfig.setting == GameConfig.Setting.Campaign)
+		if(GameConfig.gameMode == GameConfig.GameMode.Campaign)
 		{
 			count_zombunny_drop_AR = 6;
 			count_zombunny_drop_pulse = 3;
 			count_zombear_drop_health = 2;
 			count_zombear_drop_grenade = 1;
+
+			if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore)
+			{ 
+				count_zombunny_drop_AR = 3;
+				count_zombunny_drop_pulse = 6;
+			}
+			else 
+			{
+				Transform dropLocation = powerup_AssaultRifle_;
+				dropLocation.position = new Vector3(0, 0, 4);
+				DropPowerUp(powerup_AssaultRifle_, dropLocation);
+			}
 		}
-		else if(GameConfig.setting == GameConfig.Setting.Survival)
+		else if(GameConfig.gameMode == GameConfig.GameMode.Survival)
 		{
 			count_zombunny_drop_AR = 6;
 			count_zombunny_drop_pulse = 3;
@@ -246,14 +320,29 @@ public class GameManager : MonoBehaviour
 		statsText_.text = "";
 		if(win_)
 		{
-			statsText_.text += "Congrats for clearing the game! Hope you had fun playing =P\n\n";
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill)
+			{
+				statsText_.text += "Congrats for clearing the game! Hope you had fun playing. Try the harder difficulties =P\n\n";
+			}
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge)
+			{
+				statsText_.text += "Congrats for clearing the game! Hope you had fun playing. Up for HARDCORE mode? =D\n\n";
+			}
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore)
+			{
+				statsText_.text += "Congrats for clearing the game! WOW! You're a PRO!! Good job =)\n\n";
+			}
 		}
 
-		if(GameConfig.setting == GameConfig.Setting.Campaign)
+		if(GameConfig.gameMode == GameConfig.GameMode.Campaign)
 		{
-			statsText_.text += "Campaign Mode Stats: \n\n";
+			string mode = "";
+			if(GameConfig.difficulty == GameConfig.Difficulty.Chill) mode = "Chill";
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Challenge) mode = "Challenge";
+			else if(GameConfig.difficulty == GameConfig.Difficulty.Hardcore) mode = "Hardcore";
+			statsText_.text += "Campaign Mode (" + mode + ") Stats: \n\n";
 		}
-		else if(GameConfig.setting == GameConfig.Setting.Survival)
+		else if(GameConfig.gameMode == GameConfig.GameMode.Survival)
 		{
 			statsText_.text += "Survival Mode Stats: \n\n";
 		}
@@ -302,5 +391,10 @@ public class GameManager : MonoBehaviour
 		Vector3 dropPosition = dropTransform.position;
 		dropPosition.y = powerup.position.y;
 		Instantiate (powerup, dropPosition, powerup.rotation);
+
+		if(GameConfig.difficulty == GameConfig.Difficulty.Chill)
+		{ 
+			Instantiate (powerup, dropPosition, powerup.rotation);
+		}
 	}
 }

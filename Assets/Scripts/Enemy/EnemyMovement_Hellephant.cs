@@ -10,7 +10,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
     NavMeshAgent nav;
 	Animator anim;
 
-	bool playerInRange = false;
+	bool chargeEnabled = true;
 	bool chargeFinalBurst = false;
 	float chargeTimer = 999f;
 
@@ -105,7 +105,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 
 	void ChasePlayer()
 	{
-		if(playerInRange)
+		if(chargeEnabled)
 		{
 			lineOfSightRay.origin = transform.position + new Vector3(0,0.2f,0);
 			lineOfSightRay.direction = player.position - transform.position;
@@ -234,6 +234,12 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	public void TakeSecondForm()
 	{
 		secondForm = true;
+
+		if(GameConfig.difficulty != GameConfig.Difficulty.Hardcore)
+		{
+			chargeEnabled = false; // Charge only not disabled in hardcore mode.
+		}
+
 		TurnEtheral ();
 	}
 
@@ -242,22 +248,6 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		secondForm = false;
 		TurnNormal ();
 		enemyAttackAudioSource.Stop ();
-	}
-
-	void OnTriggerEnter (Collider other)
-	{
-		if(other.gameObject == player.gameObject)
-		{
-			playerInRange = true;
-		}
-	}
-
-	void OnTriggerExit (Collider other)
-	{
-		if(other.gameObject == player.gameObject)
-		{
-			playerInRange = false;
-		}
 	}
 
 	bool HasLineOfSightToPlayer()

@@ -3,13 +3,19 @@ using System.Collections;
 
 public class GameConfig : MonoBehaviour
 {
-	public enum Setting
+	public enum GameMode
 	{
 		Campaign, Survival
 	};
 
-	public static Setting setting = Setting.Campaign;
-	public static float zoom = 20f;
+	public enum Difficulty
+	{
+		Chill, Challenge, Hardcore
+	};
+
+	public static GameMode gameMode = GameMode.Campaign;
+	public static Difficulty difficulty = Difficulty.Challenge;
+	public static float zoom = 30f;
 
 	void Awake()
 	{

@@ -40,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
 		playerMaterial = playerRenderer.material;
 
 		Cursor.visible = false;
+
+		if(GameConfig.difficulty == GameConfig.Difficulty.Chill)
+		{
+			speed += 2;
+		}
 	}
 
 	void Update()
