@@ -7,7 +7,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 	Rigidbody playerRigidBody;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
-    NavMeshAgent nav;
+    UnityEngine.AI.NavMeshAgent nav;
 	Animator anim;
 
 	bool chargeEnabled = true;
@@ -54,7 +54,7 @@ public class EnemyMovement_Hellephant : MonoBehaviour
 		playerRigidBody = player.gameObject.GetComponent<Rigidbody> ();
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent <EnemyHealth> ();
-        nav = GetComponent <NavMeshAgent> ();
+        nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
 
 		enemyLayer = LayerMask.NameToLayer("Enemy");

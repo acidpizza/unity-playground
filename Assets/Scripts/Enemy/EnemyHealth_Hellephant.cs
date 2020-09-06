@@ -66,7 +66,7 @@ public class EnemyHealth_Hellephant : EnemyHealth
 
 	public override void StartSinking ()
 	{
-		GetComponent <NavMeshAgent> ().enabled = false;
+		GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
 		GetComponent <Rigidbody> ().isKinematic = true;
 		//isSinking = true;
 		gameManager.AddScore(scoreValue, enemyName, transform);

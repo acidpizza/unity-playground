@@ -6,7 +6,7 @@ public class EnemyMovement_Shooter : MonoBehaviour
     Transform player;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
-    NavMeshAgent nav;
+    UnityEngine.AI.NavMeshAgent nav;
 	Animator anim;
 
 	bool playerInRange;
@@ -26,7 +26,7 @@ public class EnemyMovement_Shooter : MonoBehaviour
         player = GameObject.FindGameObjectWithTag ("Player").transform;
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent <EnemyHealth> ();
-        nav = GetComponent <NavMeshAgent> ();
+        nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
 		anim = GetComponent <Animator> ();
 
 		shootableByEnemyMask = ~LayerMask.GetMask ("Enemy"); // Aim to layers other than enemy

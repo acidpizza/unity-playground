@@ -1,0 +1,92 @@
+- upgrade weapons faster
+- player to move faster
+- more enemy
+- reload sound
+- weapon range
+- teleport to cursor with right mouse
+- melee for double score
+- rainbow unicorn, vehicles
+- rambo mode
+- tactical nuke
+- bullet time
+- bullet goes through and hits 2 enemies
+- multiplayer
+- grenade launcher stats
+- support character upgrade
+- invincibility upgrade
+- magic mouse scroll compatibility
+- BUG: Enemies still alive when win will count to score.
+
+[Release Notes]
+
+v5.1 (27/7/2015)
+- Increased response time for scores to update after killing enemies.
+- Reduced stats font size to accomodate for more stats.
+
+v5 (26/7/2015)
+- Shifted camera offset upwards slightly, and increased max zoom out threshold. 
+- Changed controls:  +/=,- for zoom, scrollwheel or q,e for change weapon.
+- Added campaign mode.
+  -> Added Hellephant boss fight.
+  -> Possible to complete campaign mode.
+- Added hellephant (non-boss) to survival mode.
+- Changed algo for grenade kill stats so it's not possible to get > 100% accuracy.
+- Fixed bug where enemies could "overkill" the player at the end.
+- Revolver replaces pistol (technically more correct)
+
+v4.4 (16/7/2015)
+- Fixed divide by 0 stats bugs.
+- Allow camera zoom out slightly.
+- Make cursor visible at game over screen
+
+v4.3 (16/7/2015)
+- Added stats page at game end.
+
+v4.2 (14/7/2015)
+- Tweaked the grenade launcher launch algorithm
+
+v4.1 (13/7/2015)
+- Changed magic to blue.
+- Increase medikit heal value.
+- Drop assault rifle at start.
+- Fixed burst shot bug.
+
+v4 (12/7/2015)
+- Caster-type enemy.
+- Unique sounds for all attacks + empty magazine.
+- New weapon types: grenade launcher.
+- Added medi-kit drop.
+- Adjusted weapon effectiveness against specific enemy types.
+- Limit camera zoom.
+- Survival mode gameplay (gets more difficult with time).
+- Ability to pause game.
+
+v3.3 (6/7/2015)
+- Updated the crosshair to be vertical and larger to make it easier to see it when it overlaps with enemies.
+
+v3.2 (5/7/2015)
+- Crosshair replaces mouse cursor for more accurate targeting.
+- Start menu implemented.
+
+v3.1 (2/7/2015)
+- Fixed bug where enemy shooters continued shooting after death.
+
+v3 (1/7/2015)
+- Crosshair to player
+- New weapon types: pistol, assault rifle, pulse rifle
+- Ammo count
+- Ability to change weapon 
+- Enemies drop powerup when dead
+- Shooter-type enemy
+
+v2 (23/6/2015) 
+- Changed scenery: added house, fields ground texture, fences, trees.
+- Changed controls to mouse-based turning and shooting.
+
+v1 (22/6/2015) 
+- Basic scene with some blocks as walls and obstacles. 
+- Keyboard-based controls for movement, turning, strafing and shooting.
+- Melee-type enemy
+
+
+wad_eva07@hotmail.com
